@@ -3,1073 +3,513 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Pinkjulieland - รับทําเว็บไซต์ & Goodnote</title>
-<script src="https://cdn.tailwindcss.com"></script>
+<title>koyangi - Official Store</title>
+<!-- นําเข้า Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link
-href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Mit
-r:wght@300;400;500;600&display=swap" rel="stylesheet">
-<script>
-tailwind.config = {
-theme: {
-extend: {
-fontFamily: {
-'mitr': ['Mitr'
-,
-'sans-serif'],
-'fredoka': ['Fredoka'
-,
-'sans-serif'],
-},
-colors: {
-'pj-bg': '#f9fbff'
-,
-'pj-blue-light': '#bde0fe'
-,
-'pj-blue-main': '#81c3fd'
-,
-'pj-blue-dark': '#2b5f9e'
-,
-'pj-yellow-light': '#fff3cd'
-,
-'pj-yellow-main': '#ffe066'
-,
-'pj-pink': '#ffb3c6'
-,
-'pj-white': '#ffffff'
-,
-},
-boxShadow: {
-'soft': '0 10px 40px -10px rgba(129, 195, 253, 0.3)'
-,
-'hard': '4px 4px 0px 0px rgba(43, 95, 158, 0.2)'
-,
-}
-}
-}
-}
-</script>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Mitr:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-#2b5f9e; }
-body { font-family: 'Mitr'
-, sans-serif; background-color: #f9fbff; overflow-x: hidden; color:
-.font-eng { font-family: 'Fredoka'
-, sans-serif; }
-/* Custom UI Shapes matching Reference 2 */
-.shape-header {
-border-radius: 40px 100px 100px 40px;
-position: relative;
+/*
+--- Color Variables ---
+*/
+:root {
+--bg-main: #FFFDE7; 
+--bg-sidebar: #38C2B3; 
+--bg-card: #FFFFFF; 
+--banner-color: #B5E57A; 
+--banner-pattern: #E3F8B3;
+--text-dark: #2A4C48; 
+--text-light: #6C8E8A; 
+--text-white: #FFFFFF;
+--accent-pink: #FFB3D9; 
+--accent-yellow: #FFD54F; 
+--accent-green: #AEE26C; 
+--accent-teal: #38C2B3; 
+--border-radius-lg: 30px;
+--border-radius-md: 20px;
+--border-radius-sm: 12px;
+--shadow-card: 0 10px 30px rgba(56, 194, 179, 0.08);
+--shadow-hover: 0 15px 35px rgba(56, 194, 179, 0.15);
 }
-.shape-info {
-border-radius: 20px;
+
+* {
+margin: 0;
+padding: 0;
+box-sizing: border-box;
 }
-.shape-bubble-left {
-border-radius: 20px;
-position: relative;
+
+body {
+font-family: 'Mitr', sans-serif !important;
+background-color: var(--bg-main);
+color: var(--text-dark);
+line-height: 1.6;
+overflow-x: hidden;
+background-image: radial-gradient(var(--banner-pattern) 2px, transparent 2px);
+background-size: 30px 30px;
 }
-.shape-bubble-left::after {
-content: '';
-position: absolute;
-right: -15px;
-top: 50%;
-transform: translateY(-50%);
-border-width: 15px 0 15px 20px;
-border-color: transparent transparent transparent #81c3fd;
+h1, h2, h3, h4, h5, .english-text {
+font-family: 'Fredoka', 'Mitr', sans-serif !important;
 }
-.shape-nota {
-border-radius: 20px;
-position: relative;
-}
-/* Scrollbar */
-::-webkit-scrollbar { width: 6px; }
+a { text-decoration: none; color: inherit; }
+ul { list-style: none; }
+button { cursor: pointer; border: none; font-family: inherit; }
+
+/* --- Custom Scrollbar --- */
+::-webkit-scrollbar { width: 8px; }
 ::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: #bde0fe; border-radius: 10px; }
-/* Modal Animation */
-.modal { transition: opacity 0.3s ease, visibility 0.3s ease; }
-.modal.active { opacity: 1; visibility: visible; }
-.modal.inactive { opacity: 0; visibility: hidden; }
-.modal-content { transition: transform 0.3s ease; transform: scale(0.95); }
-.modal.active .modal-content { transform: scale(1); }
-/* Background floating shapes */
-.bg-shapes {
-none; overflow: hidden;
-position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -1; pointer-events:
+::-webkit-scrollbar-thumb { background: var(--accent-pink); border-radius: 10px; }
+
+/* --- Layout Structure --- */
+.app-container {
+display: flex;
+min-height: 100vh;
+max-width: 1200px;
+margin: 0 auto;
+position: relative;
+}
+
+@keyframes float {
+0% { transform: translateY(0px) rotate(0deg); }
+50% { transform: translateY(-15px) rotate(10deg); }
+100% { transform: translateY(0px) rotate(0deg); }
+}
+
+.bg-shape {
+position: fixed;
+z-index: 0;
+animation: float 6s ease-in-out infinite;
+pointer-events: none;
+}
+.shape-1 { top: 10%; left: 2%; width: 80px; height: 80px; fill: var(--accent-pink); opacity: 0.5; animation-delay: 0s; }
+.shape-2 { top: 50%; right: 2%; width: 60px; height: 60px; fill: var(--accent-yellow); opacity: 0.5; animation-delay: 1.5s; }
+.shape-3 { bottom: 20%; left: 5%; width: 50px; height: 50px; fill: var(--accent-teal); opacity: 0.3; animation-delay: 3s; }
+
+.main-content {
+flex: 1;
+padding: 40px 20px;
+display: flex;
+flex-direction: column;
+width: 100%;
+position: relative;
+z-index: 1;
+}
+
+.banner {
+height: 250px;
+background-color: #F2FAEE;
+border-radius: var(--border-radius-lg);
+position: relative;
+overflow: hidden;
+display: flex;
+justify-content: flex-end;
+align-items: center;
+padding: 40px;
+}
+
+.banner-svg-decor {
+position: absolute;
+animation: float 4s ease-in-out infinite;
+opacity: 0.6;
+}
+.bsd-1 { top: 30px; left: 10%; width: 80px; height: 80px; fill: var(--accent-pink); }
+.bsd-2 { bottom: -20px; left: 30%; width: 120px; height: 120px; fill: var(--accent-yellow); animation-delay: 1.5s; }
+.bsd-3 { top: 50px; right: 65%; width: 50px; height: 50px; fill: var(--bg-sidebar); animation-delay: 2.5s; opacity: 0.4; }
+
+.banner-text {
+position: relative;
+z-index: 1;
+text-align: right;
+color: var(--text-dark);
+}
+.banner-text h1 {
+font-size: 48px;
+color: var(--bg-sidebar);
+text-shadow: 2px 2px 0px #fff;
+letter-spacing: 2px;
+}
+.banner-text p {
+font-size: 18px;
+font-weight: 500;
+background: rgba(255,255,255,0.7);
+padding: 5px 15px;
+border-radius: 20px;
+display: inline-block;
+margin-top: 10px;
+}
+
+.dashboard-grid {
+display: flex;
+gap: 30px;
+margin-top: -80px;
+position: relative;
+z-index: 10;
+}
+
+.left-col {
+width: 320px;
+flex-shrink: 0;
+display: flex;
+flex-direction: column;
+gap: 20px;
+}
+
+.profile-card {
+background-color: var(--bg-card);
+border-radius: var(--border-radius-lg);
+padding: 40px 20px 30px;
+box-shadow: var(--shadow-card);
+text-align: center;
+position: relative;
+}
+
+.badge-premium-new {
+position: absolute;
+top: 15px;
+right: 15px;
+background-color: var(--accent-yellow);
+color: var(--text-dark);
+padding: 6px 12px;
+border-radius: 20px;
+font-size: 11px;
+font-weight: 600;
+display: flex;
+align-items: center;
+gap: 4px;
+box-shadow: 0 4px 10px rgba(255, 213, 79, 0.4);
+animation: float 4s ease-in-out infinite;
+}
+.badge-premium-new svg { width: 12px; height: 12px; fill: currentColor; }
+
+.profile-avatar {
+width: 120px;
+height: 120px;
+border-radius: 50%;
+background-color: var(--text-white);
+border: 6px solid var(--bg-card);
+margin: -90px auto 15px;
+display: flex;
+justify-content: center;
+align-items: center;
+position: relative;
+box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+.profile-avatar:hover { transform: scale(1.05) translateY(-5px); }
+
+.profile-avatar .main-avatar {
+width: 65px;
+height: 65px;
+fill: var(--bg-sidebar);
+position: relative;
+z-index: 5;
+}
+
+.logo-decor {
+position: absolute;
+z-index: 10;
+animation: float 3s ease-in-out infinite;
+filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+}
+.ld-1 { top: -10px; right: 0px; width: 28px; height: 28px; fill: var(--accent-yellow); animation-delay: 0s; }
+.ld-2 { bottom: 10px; left: -15px; width: 22px; height: 22px; fill: var(--accent-pink); animation-delay: 0.8s; }
+.ld-3 { top: 30px; left: -10px; width: 18px; height: 18px; fill: var(--accent-green); animation-delay: 1.6s; }
+
+.status-dot {
+width: 15px;
+height: 15px;
+background-color: var(--accent-green);
+border: 3px solid var(--bg-card);
+border-radius: 50%;
+position: absolute;
+bottom: 5px;
+right: 15px;
+}
+
+.profile-name { font-size: 28px; color: var(--text-dark); margin-bottom: 5px; }
+.profile-title { font-size: 14px; color: var(--text-light); margin-bottom: 20px; padding: 0 10px; }
+
+.profile-stats {
+display: flex;
+justify-content: center;
+gap: 30px;
+margin-bottom: 10px;
+padding-bottom: 15px;
+}
+.stat-item h4 { font-size: 18px; color: var(--text-dark); }
+.stat-item p { font-size: 12px; color: var(--text-light); }
+
+.quick-nav {
+display: flex;
+flex-wrap: wrap;
+gap: 8px;
+justify-content: center;
+margin-bottom: 25px;
+padding-bottom: 25px;
+border-bottom: 1px dashed #eee;
+}
+.quick-nav-item {
+padding: 8px 14px;
+background-color: var(--bg-main);
+border-radius: 20px;
+font-size: 13px;
+font-weight: 500;
+color: var(--text-dark);
+display: flex;
+align-items: center;
+gap: 6px;
+transition: all 0.3s ease;
+border: 1px solid transparent;
+}
+.quick-nav-item:hover {
+background-color: var(--bg-sidebar);
+color: var(--text-white);
+transform: translateY(-2px);
+box-shadow: 0 5px 10px rgba(56, 194, 179, 0.2);
+}
+.quick-nav-item svg { width: 14px; height: 14px; fill: currentColor; }
+
+.contact-group { display: flex; justify-content: center; gap: 10px; margin-bottom: 20px; }
+.btn-contact {
+padding: 8px 16px;
+border-radius: 20px;
+font-size: 13px;
+font-weight: 500;
+display: flex;
+align-items: center;
+gap: 6px;
+transition: all 0.3s ease;
+}
+.btn-primary { background-color: var(--bg-sidebar); color: var(--text-white); }
+.btn-primary:hover { background-color: #2da396; }
+
+.contact-links {
+display: flex;
+flex-direction: column;
+gap: 10px;
+text-align: left;
+background: #f9fdfc;
+padding: 15px;
+border-radius: var(--border-radius-sm);
+}
+.contact-link-item { display: flex; align-items: center; gap: 10px; font-size: 13px; color: var(--text-dark); }
+.contact-link-item svg { width: 16px; height: 16px; fill: var(--bg-sidebar); }
+
+.right-col {
+flex: 1;
+display: grid;
+grid-template-columns: repeat(2, 1fr);
+grid-auto-rows: min-content;
+gap: 25px;
+}
+
+.content-card {
+background-color: var(--bg-card);
+border-radius: var(--border-radius-lg);
+padding: 30px;
+box-shadow: var(--shadow-card);
+transition: transform 0.3s ease;
+}
+.content-card:hover { transform: translateY(-3px); }
+.card-full { grid-column: span 2; }
+
+.card-header {
+display: flex;
+align-items: center;
+gap: 10px;
+margin-bottom: 20px;
+padding-bottom: 10px;
+border-bottom: 2px solid var(--bg-main);
+}
+.card-header svg { width: 24px; height: 24px; fill: var(--accent-teal); }
+.card-title { font-size: 20px; color: var(--bg-sidebar); }
+
+.btn-fake {
+width: 100%;
+padding: 12px;
+border-radius: var(--border-radius-md);
+background-color: var(--accent-pink);
+color: white;
+font-weight: 600;
+font-size: 15px;
+margin-top: 15px;
+transition: all 0.3s ease;
+display: flex;
+justify-content: center;
+align-items: center;
+gap: 8px;
+position: relative;
+overflow: hidden;
+}
+.btn-fake::after {
+content: ''; position: absolute; top: 0; left: -100%; width: 50%; height: 100%;
+background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.3) 50%, rgba(255,255,255,0) 100%);
+transform: skewX(-25deg); animation: shine 3s infinite;
+}
+@keyframes shine { 0% { left: -100%; } 20% { left: 200%; } 100% { left: 200%; } }
+
+.badge-hot {
+background-color: #ff6b6b; color: white; font-size: 10px; padding: 2px 8px; border-radius: 10px;
+margin-left: 8px; display: inline-block; animation: float 2s infinite;
+}
+
+.list-item { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 10px; font-size: 14px; }
+.list-icon { flex-shrink: 0; width: 20px; height: 20px; fill: var(--accent-pink); margin-top: 2px; }
+
+.highlight-box {
+background-color: #f0fbf9; border-left: 4px solid var(--bg-sidebar);
+padding: 15px; border-radius: 0 var(--border-radius-sm) var(--border-radius-sm) 0;
+font-size: 14px; margin-top: 15px;
+}
+
+.portfolio-group { display: flex; flex-direction: column; gap: 15px; }
+.btn-portfolio {
+display: flex; align-items: center; justify-content: space-between;
+padding: 15px 20px; background-color: var(--bg-main); border-radius: var(--border-radius-md);
+font-size: 16px; font-weight: 500; transition: all 0.3s ease;
+}
+
+.modal-overlay {
+position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+background-color: rgba(42, 76, 72, 0.5); backdrop-filter: blur(5px);
+display: flex; justify-content: center; align-items: center;
+z-index: 1000; opacity: 0; pointer-events: none; transition: all 0.3s ease;
+}
+.modal-overlay.active { opacity: 1; pointer-events: all; }
+.modal-content {
+background-color: var(--bg-card); width: 90%; max-width: 500px;
+border-radius: var(--border-radius-lg); padding: 30px; position: relative;
+max-height: 80vh; overflow-y: auto;
+}
+
+@media (max-width: 768px) {
+.app-container { flex-direction: column; }
+.dashboard-grid { flex-direction: column; margin-top: -60px; }
+.left-col { width: 100%; }
+.right-col { grid-template-columns: 1fr; }
+.banner { height: 200px; justify-content: center; }
+.banner-text { text-align: center; }
 }
 </style>
 </head>
-<body class="antialiased relative selection:bg-pj-yellow-main selection:text-pj-blue-dark">
-<!-- Background Decors (From UI Ref) -->
-<div class="bg-shapes">
-<svg class="absolute top-10 -left-10 w-64 h-64 text-pj-blue-light opacity-50" viewBox="0
-0 200 200" xmlns="http://www.w3.org/2000/svg">
-<path fill="currentColor"
-d="M44.7,
--76.4C58.8,
--69.2,71.8,
--59.1,81.3,
--46.3C90.8,
--33.5,96.8,
--18,95.5,
--2.9C94.2,12.2,8
-5.6,26.9,75.3,39.6C65,52.3,53,63.1,39.4,70.5C25.8,77.9,10.6,81.9,
--4.3,81.4C-19.2,80.9,
--33.
-7,75.9,
--47.5,68.4C-61.3,60.9,
--74.3,50.9,
--82.4,37.6C-90.5,24.3,
--93.7,7.7,
--91.4,
--8.2C-89.1,
--2
-4.1,
--81.3,
--39.3,
--69.9,
--51.1C-58.5,
--62.9,
--43.5,
--71.3,
--29.1,
--75.7C-14.7,
--80.1,
--1.2,
--80.5,
-12.5,
--78.9C26.2,
--77.3, 30.6,
--83.6, 44.7,
--76.4Z" transform="translate(100 100) scale(1.1)" />
-</svg>
-<svg class="absolute top-[40%] right-[-50px] w-72 h-72 text-pj-yellow-light opacity-60"
-viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-<path fill="currentColor"
-d="M51.8,
--70.5C65.5,
--60.8,73.9,
--43.8,77.9,
--26.8C81.9,
--9.8,81.5,7.2,74.9,21.8C68.3,36.4,55
-.5,48.6,41.2,57.1C26.9,65.6,11.1,70.4,
--4.1,76.3C-19.3,82.2,
--33.9,89.2,
--46.9,82.9C-59.9,76.6
-,
--71.3,57,
--76.3,38.2C-81.3,19.4,
--79.9,1.4,
--73.4,
--14.2C-66.9,
--29.8,
--55.3,
--43,
--41.8,
--52.5C-28.
-3,
--62,
--14.1,
--67.8,1.5,
--70.1C17.1,
--72.4,38.1,
--80.2,51.8,
--70.5Z" transform="translate(100
-100)" />
-</svg>
-<!-- เพิ่มของตกแต่งพื้นหลัง -->
-<svg class="absolute top-[20%] left-[10%] w-12 h-12 text-pj-pink opacity-40
-animate-pulse" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L15.09 8.26L22
-9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12
-2Z"/></svg>
-<svg class="absolute bottom-[25%] left-[-30px] w-48 h-48 text-pj-blue-main opacity-20"
-viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor"
-d="M42.7,
--73.4C55.9,
--65.7,67.7,
--54.6,76.5,
--41.2C85.3,
--27.8,91.1,
--12.1,89.5,2.9C87.9,17.9,
-78.9,32.2,68.2,44.1C57.5,56,45.1,65.4,31.4,71.5C17.7,77.6,2.7,80.4,
--11.9,79.5C-26.5,78.6,
--
-40.7,74,
--53.1,65.6C-65.5,57.2,
--76.1,45,
--81.6,30.6C-87.1,16.2,
--87.5,
--0.4,
--82.6,
--15.5C-77.7,
--
-30.6,
--67.5,
--44.2,
--54.6,
--52.3C-41.7,
--60.4,
--26.1,
--63,
--11.5,
--63.9C3.1,
--64.8,17.7,
--64,29.5,
--71.1
-C41.3,
--78.2,50.3,
--83.2,42.7,
--73.4Z" transform="translate(100 100)"/></svg>
-<svg class="absolute bottom-[10%] right-[5%] w-16 h-16 text-pj-yellow-main opacity-50"
-viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"
-stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8
-14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9"
-x2="15.01" y2="9"/></svg>
+<body>
+<div class="app-container">
+<!-- Floating Shapes -->
+<svg class="bg-shape shape-1" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+<svg class="bg-shape shape-2" viewBox="0 0 24 24"><path d="M12 2.5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 12 2.5Zm0 17a7.5 7.5 0 1 1 7.5-7.5 7.51 7.51 0 0 1-7.5 7.5Z"/></svg>
+
+<main class="main-content">
+<!-- Banner Section -->
+<div class="banner">
+<svg class="banner-svg-decor bsd-1" viewBox="0 0 24 24"><path d="M12 2l2.4 7.6L22 12l-7.6 2.4L12 22l-2.4-7.6L2 12l7.6-2.4L12 2z"/></svg>
+<div class="banner-text">
+<h1 class="english-text">koyangi</h1>
+<p>รับออกแบบป้าย ลายน้ำ Google Sheet เว็บไซต์⭐️</p>
 </div>
-<main class="max-w-[500px] mx-auto min-h-screen px-4 py-12 relative z-10 flex flex-col
-gap-8">
-<!-- Header Section (Mimicking "Amigos marinos" card) -->
-<section class="relative">
-<!-- connecting line -->
-<div class="absolute -right-4 top-[80%] w-12 h-32 border-r-4 border-b-4
-border-pj-blue-light rounded-br-[40px] z-0"></div>
-<div class="shape-header bg-pj-blue-light p-8 pr-16 shadow-soft z-10 relative mt-4
-ml-[-20px] mr-4">
-<!-- พื้นที่สําหรับใส่โลโก ้ (โพลารอยด์ + ดาวแปะ) ขยายใหญ่ขึ้นและขยับไปทางขวา -->
-<div class="absolute -top-10 -right-4 z-30 transform rotate-3 hover:rotate-0
-transition-transform duration-300">
-<!-- ดาวแปะมุมซ ้ ายบน (ใหญ่ขึ้น) -->
-<svg class="absolute -top-4 -left-5 w-12 h-12 text-pj-yellow-main
-drop-shadow-md z-40" viewBox="0 0 24 24" fill="currentColor">
-<path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82
-21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
-</svg>
-<!-- กรอบรูปโพลารอยด์ (ใหญ่ขึ้น) -->
-<div class="w-32 h-36 bg-pj-white p-2.5 pb-8 rounded shadow-lg border
-border-pj-blue-light/50 flex flex-col items-center relative">
-<div class="w-full h-full bg-pj-blue-light/20 overflow-hidden rounded-sm">
-<!-- นําลิงก์รูปโลโก ้ ของคุณมาเปลี่ยนตรง src="ตรงนี้"
--->
-<img src="https://placehold.co/150x150/ffb3c6/ffffff?text=Logo" alt="โลโก ้ "
-class="w-full h-full object-cover">
+</div>
+
+<div class="dashboard-grid">
+<!-- Left Column -->
+<div class="left-col">
+<div class="profile-card">
+<div class="badge-premium-new">
+<svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+STATUS: OPEN
+</div>
+<div class="profile-avatar">
+<svg class="logo-decor ld-1" viewBox="0 0 24 24"><path d="M12 2l2.4 7.6L22 12l-7.6 2.4L12 22l-2.4-7.6L2 12l7.6-2.4L12 2z"/></svg>
+<svg class="main-avatar" viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+<div class="status-dot"></div>
+</div>
+<h2 class="profile-name english-text">koyangi</h2>
+<p class="profile-title">ยินดีต้อนรับสู่ Koyangi - Official Store ค่ะ</p>
+
+<div class="quick-nav">
+<a href="#services" class="quick-nav-item">บริการ</a>
+<a href="#portfolio" class="quick-nav-item">ผลงาน</a>
+<a href="#rules" class="quick-nav-item">เงื่อนไข</a>
+</div>
+
+<div class="contact-links">
+<a href="https://www.facebook.com/profile.php?id=61554192600355" target="_blank" class="contact-link-item">
+<svg viewBox="0 0 24 24"><path d="M12 2.04C6.5 2.04 2 6.53 2 12.06C2 17.06 5.66 21.21 10.44 21.96V14.96H7.9V12.06H10.44V9.85C10.44 7.34 11.93 5.96 14.22 5.96C15.31 5.96 16.45 6.15 16.45 6.15V8.62H15.19C13.95 8.62 13.56 9.39 13.56 10.18V12.06H16.34L15.89 14.96H13.56V21.96A10 10 0 0 0 22 12.06C22 6.53 17.5 2.04 12 2.04Z"/></svg>
+Facebook
+</a>
+<a href="https://line.me/ti/p/LfBtdhlrVa" target="_blank" class="contact-link-item">
+<svg viewBox="0 0 24 24"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1z"/></svg>
+Line Official
+</a>
+<a href="https://www.instagram.com/k0yangi_ii" target="_blank" class="contact-link-item">
+<svg viewBox="0 0 24 24"><path d="M7.8 2h8.4C19.4 2 22 4.6 22 7.8v8.4a5.8 5.8 0 0 1-5.8 5.8H7.8C4.6 22 2 19.4 2 16.2V7.8A5.8 5.8 0 0 1 7.8 2m-.2 2A3.6 3.6 0 0 0 4 7.6v8.8C4 18.39 5.61 20 7.6 20h8.8a3.6 3.6 0 0 0 3.6-3.6V7.6C20 5.61 18.39 4 16.4 4H7.6"/></svg>
+Instagram
+</a>
 </div>
 </div>
 </div>
-<!-- ของตกแต่งใน Header -->
-<svg class="absolute top-8 right-20 w-5 h-5 text-pj-yellow-main opacity-90"
-viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L15.09 8.26L22 9.27L17
-14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
-<svg class="absolute bottom-4 right-12 w-6 h-6 text-pj-white opacity-60"
-viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4"><circle cx="12"
-cy="12" r="10"/></svg>
-<svg class="absolute top-6 left-6 w-4 h-4 text-pj-white opacity-80" viewBox="0 0
-24 24" fill="currentColor"><circle cx="12" cy="12" r="10"/></svg>
-<h1 class="font-eng text-5xl text-pj-white font-bold tracking-wide drop-shadow-md
-mb-2 relative z-10">Pinkjulie<br><span class="text-3xl ml-4">land</span></h1>
-<div class="inline-block bg-pj-blue-dark text-pj-white font-eng px-4 py-1.5
-rounded-full text-sm mt-3 shadow-md relative z-10">
-Welcome to my shop
+
+<!-- Right Column -->
+<div class="right-col">
+<section class="content-card" id="services">
+<div class="card-header">
+<h3 class="card-title">🎨 งานที่รับทำ</h3>
 </div>
-</div>
-</p>
-</section>
-<p class="mt-6 ml-6 text-sm font-medium pr-4 relative z-10">
-ร ้ านจูรับทําเว็บไซต์ครบวงจร และจําหน่ายแอป Goodnote ทุกรูปแบบ เริ่มต ้ นที่ 20.
-- เท่านั้น
-<!-- Services Section (Mimicking "INFORMACION" card) -->
-<section class="relative ml-8">
-<!-- ของตกแต่งลอยๆ ข ้ าง Services -->
-<svg class="absolute -left-10 top-12 w-8 h-8 text-pj-pink opacity-80 z-20
-animate-bounce" style="animation-duration: 3s;" viewBox="0 0 24 24"
-fill="currentColor"><path d="M12 2l2.4 7.4h7.6l-6 4.6 2.3 7.4-6.3-4.8-6.3 4.8
-2.3-7.4-6-4.6h7.6z"/></svg>
-<!-- Tab on top -->
-<div class="absolute -top-3 right-6 bg-pj-yellow-light text-pj-blue-dark font-eng
-font-bold px-4 py-1 rounded-full text-xs shadow-sm z-20 border-2 border-pj-white flex
-items-center gap-1">
-<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M17
-5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
-Services
-</div>
-<div class="shape-info bg-pj-white border-2 border-pj-blue-light p-6 shadow-soft
-relative z-10 flex gap-4">
-<!-- ดาวตกแต่งมุมซ ้ ายบนของ Services -->
-<svg class="absolute -top-3 -left-3 w-7 h-7 text-pj-pink z-20 transform -rotate-12
-drop-shadow-sm" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L15.09 8.26L22
-9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12
-2Z"/></svg>
-<div class="flex-1">
-<div class="flex items-center gap-2 mb-3">
-<h2 class="font-eng text-xl font-bold uppercase tracking-wider
-text-pj-blue-main">Websites</h2>
-<svg width="18" height="18" viewBox="0 0 24 24" fill="none"
-stroke="currentColor" stroke-width="2" class="text-pj-yellow-main"><path d="M21.44
-11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0
-1-2.83-2.83l8.49-8.48"/></svg>
-</div>
-<p class="text-sm font-semibold mb-2">เว็บที่รับทํา หลากหลายประเภท</p>
-<ul class="text-xs space-y-1.5 mb-4 list-none pl-1">
-<li class="flex items-start gap-1"><svg class="w-3 h-3 mt-0.5 text-pj-pink
-shrink-0" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="8"/></svg> เว็บ
-เรทราคาแอปพรีเมียม</li>
-<li class="flex items-start gap-1"><svg class="w-3 h-3 mt-0.5 text-pj-pink
-shrink-0" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="8"/></svg> เว็บ
-เรทราคารับเติมเกมส์</li>
-<li class="flex items-start gap-1"><svg class="w-3 h-3 mt-0.5 text-pj-pink
-shrink-0" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="8"/></svg> เว็บ
-เรทราคารับทําป้าย</li>
-<li class="flex items-start gap-1"><svg class="w-3 h-3 mt-0.5 text-pj-pink
-shrink-0" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="8"/></svg> เว็บ
-อื่น ๆ สอบถามเพิ่มเติมได ้ ค่ะ</li>
+<ul>
+<li class="list-item"><svg class="list-icon" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>ป้าย ลายน้ำ โลโก้</li>
+<li class="list-item"><svg class="list-icon" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>Google Sheet</li>
+<li class="list-item"><svg class="list-icon" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>Website</li>
 </ul>
-<div class="bg-pj-blue-light/30 p-3 rounded-xl text-xs leading-relaxed">
-เว็บสารพัดประโยชน์ไม่จํากัดข ้ อมูลในการใส่ อยากให ้ แสดงอะไรบนหน ้ าเว็บ ใส่มาได ้
-เลย ทางเราออกแบบจัดวางให ้ ฟรี ⭐
+<button class="btn-fake" onclick="window.location.href='https://line.me/ti/p/LfBtdhlrVa'">ทักแชทสั่งงานได้เลยค่ะ</button>
+</section>
+
+<section class="content-card" id="portfolio">
+<div class="card-header">
+<h3 class="card-title">⭐️ ตัวอย่างงาน</h3>
 </div>
-</div>
-<!-- Right vertical action area mimic -->
-<div class="w-12 bg-pj-blue-light rounded-xl flex flex-col items-center justify-center
-py-4 text-pj-white shrink-0">
-<svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-stroke="currentColor" stroke-width="2"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0
-2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
-</div>
+<div class="portfolio-group">
+<a href="https://koyangiiii.github.io/Koyangi-Store/" target="_blank" class="btn-portfolio">Koyangi Store <svg width="16" height="16" viewBox="0 0 24 24"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z"/></svg></a>
+<a href="https://koyangiiii.github.io/Koyangi-Design/" target="_blank" class="btn-portfolio">Koyangi Design <svg width="16" height="16" viewBox="0 0 24 24"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z"/></svg></a>
 </div>
 </section>
-<!-- Portfolio Section (Mimicking "Premios" left bubble card) -->
-<section class="relative mr-8 mt-4">
-<!-- ของตกแต่งลอยๆ ข ้ าง Portfolio -->
-<svg class="absolute -right-6 -bottom-4 w-10 h-10 text-pj-yellow-main opacity-80
-z-20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L15.09 8.26L22 9.27L17
-14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
-<svg class="absolute top-2 right-2 w-4 h-4 text-pj-blue-light opacity-50 z-0"
-viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="10"/></svg>
-<!-- connecting line -->
-<div class="absolute -left-6 top-[20%] w-6 h-full border-l-4 border-t-4 border-pj-pink
-rounded-tl-[40px] z-0 opacity-60"></div>
-<div class="shape-bubble-left bg-pj-blue-main p-5 shadow-soft z-10 text-pj-white">
-<!-- ดาวตกแต่งด ้ านใน Portfolio -->
-<svg class="absolute top-4 right-4 w-6 h-6 text-pj-yellow-main opacity-90
-transform rotate-12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L15.09 8.26L22
-9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12
-2Z"/></svg>
-<svg class="absolute bottom-2 left-6 w-4 h-4 text-pj-white opacity-40 transform
--rotate-12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L15.09 8.26L22 9.27L17
-14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
-<div class="flex items-center gap-2 mb-3">
-<h2 class="font-eng text-2xl font-bold tracking-wide">Portfolio</h2>
-<svg width="20" height="20" viewBox="0 0 24 24" fill="none"
-stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2
-2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8"
-y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+
+<section class="content-card card-full" id="rules">
+<div class="card-header">
+<h3 class="card-title">📋 เงื่อนไข & ขั้นตอน</h3>
 </div>
-<p class="text-sm mb-4">ตัวอย่างงานเว็บพิ้งจู คลิกเลือกหมวดหมู่เพื่อดูผลงานได ้ เลยค่ะ
-</p>
-<!-- Compact 3 Category Buttons -->
-<div class="flex flex-col gap-2">
-<button onclick="openModal('modal-sodsai')" class="bg-pj-white
-text-pj-blue-dark py-2 px-4 rounded-full text-sm font-semibold flex justify-between
-items-center hover:bg-pj-yellow-light transition-colors">
-หมวดหมู่: สดใส
-<svg width="16" height="16" viewBox="0 0 24 24" fill="none"
-stroke="currentColor" stroke-width="3"><polyline points="9 18 15 12 9 6"/></svg>
-</button>
-<button onclick="openModal('modal-dark')" class="bg-pj-white text-pj-blue-dark
-py-2 px-4 rounded-full text-sm font-semibold flex justify-between items-center
-hover:bg-pj-yellow-light transition-colors">
-หมวดหมู่: โทนมืด
-<svg width="16" height="16" viewBox="0 0 24 24" fill="none"
-stroke="currentColor" stroke-width="3"><polyline points="9 18 15 12 9 6"/></svg>
-</button>
-<button onclick="openModal('modal-pastel')" class="bg-pj-white
-text-pj-blue-dark py-2 px-4 rounded-full text-sm font-semibold flex justify-between
-items-center hover:bg-pj-yellow-light transition-colors">
-หมวดหมู่: พาสเทล
-<svg width="16" height="16" viewBox="0 0 24 24" fill="none"
-stroke="currentColor" stroke-width="3"><polyline points="9 18 15 12 9 6"/></svg>
-</button>
-</div>
-</div>
-</section>
-<!-- Pricing & Add-ons Section -->
-<section class="ml-4 mr-4 mt-2 relative">
-<!-- ของตกแต่งลอยๆ แถว Pricing -->
-<svg class="absolute -right-2 top-32 w-12 h-12 text-pj-blue-light opacity-50 z-0"
-viewBox="0 0 24 24" fill="currentColor"><rect x="2" y="2" width="20" height="20" rx="4"
-transform="rotate(15 12 12)"/></svg>
-<svg class="absolute -left-2 bottom-10 w-8 h-8 text-pj-pink opacity-40 z-0"
-viewBox="0 0 24 24" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2
-8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42
-22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
-<div class="bg-pj-white rounded-[30px] p-1 shadow-soft border border-pj-blue-light
-relative z-10">
-<!-- ดาวตกแต่งขอบบน Pricing -->
-<svg class="absolute -top-4 right-10 w-8 h-8 text-pj-yellow-main z-20
-drop-shadow-sm transform rotate-12" viewBox="0 0 24 24" fill="currentColor"><path d="M12
-2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91
-8.26L12 2Z"/></svg>
-<div class="bg-pj-yellow-light/40 rounded-[26px] p-5">
-<div class="text-center mb-4">
-<div class="inline-flex bg-pj-yellow-main text-pj-blue-dark font-eng font-bold
-px-5 py-1.5 rounded-full mb-2 shadow-sm">
-Pricing
-</div>
-<h3 class="text-xl font-bold">ราคาเริ่มต ้ น 129.
--</h3>
-<p class="text-xs text-pj-blue-dark/70">(สําหรับรายละเอียดไม่เกิน 200 lines และ
-ใส่โลโก ้ อย่างเดียว)</p>
-</div>
-<div class="space-y-3 text-sm">
-<div class="bg-pj-white p-3 rounded-xl shadow-sm border border-pj-white">
-<p class="font-semibold text-pj-blue-main mb-1">กรณีรายละเอียดเพิ่มขึ้น
-</p>
-<ul class="text-xs space-y-1">
-<li class="flex justify-between items-center"><span class="flex
-items-center gap-1"><svg width="12" height="12" viewBox="0 0 24 24" fill="none"
-stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> เกิน 200
-lines</span> <span class="font-bold">เริ่มที่ 139.
--</span></li>
-<li class="flex justify-between items-center"><span class="flex
-items-center gap-1"><svg width="12" height="12" viewBox="0 0 24 24" fill="none"
-stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> เกิน 400
-lines</span> <span class="font-bold">เริ่มที่ 189.
--</span></li>
-<li class="flex justify-between items-center"><span class="flex
-items-center gap-1"><svg width="12" height="12" viewBox="0 0 24 24" fill="none"
-stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> เกิน 600
-lines</span> <span class="font-bold">เริ่มที่ 249.
--</span></li>
-</ul>
-</div>
-<div class="flex items-center justify-between bg-pj-white p-3 rounded-xl
-shadow-sm border border-pj-white">
-<span class="font-medium text-xs">Add on รูปแบนเนอร์ 1–2 รูป</span>
-<span class="font-bold text-pj-pink">+29.
--</span>
-</div>
-<div class="bg-pj-blue-light/20 p-3 rounded-xl text-xs space-y-1">
-<p class="font-semibold text-pj-blue-dark flex items-center gap-1"><svg
-width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1
-1-4L16.5 3.5z"/></svg> แก ้ ไขข ้ อมูลหลังส่งตรวจสอบ ฟรี 1 ครั้ง</p>
-<p class="text-pj-blue-dark/80 pl-5">หลังส่งลิงก์งานแล ้ ว หากมีการแก ้ ไข
-เพิ่มเติม:</p>
-<ul class="pl-5">
-<li>- คิดค่าปรับแก ้ จุดละ 5.
-- (ข ้ อความ)</li>
-<li>- เปลี่ยนรูปจุดละ 29.
--</li>
-</ul>
-</div>
-</div>
-</div>
-</div>
-<p class="text-[10px] text-center mt-3 text-pj-blue-dark/60 px-4">
-หมายเหตุ: ราคาขึ้นอยู่กับความละเอียดของข ้ อมูลและปริมาณเนื้อหา ทางร ้ านขอสงวนสิทธิ์
-ในการประเมินราคาตามความเหมาะสมนะคะ
-</p>
-</section>
-<!-- Promo Section (Mimicking Center horizontal layout) -->
-<section class="ml-8 mr-4 relative">
-<div class="absolute -left-12 top-1/2 w-10 border-b-4 border-pj-blue-light
-border-dashed"></div>
-<div class="bg-pj-pink text-pj-white rounded-3xl p-5 shadow-soft relative
-overflow-hidden">
-<svg class="absolute -right-4 -bottom-4 w-24 h-24 text-pj-white opacity-20"
-viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L15.09 8.26L22 9.27L17
-14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
-<!-- ดาวตกแต่งใน Promo -->
-<svg class="absolute top-4 right-4 w-6 h-6 text-pj-yellow-main drop-shadow-sm
-animate-pulse" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L15.09 8.26L22
-9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12
-2Z"/></svg>
-<h3 class="font-eng text-xl font-bold mb-1">PROMOTION SET</h3>
-<p class="text-lg font-bold bg-pj-white text-pj-pink inline-block px-3 py-1
-rounded-lg mb-4 shadow-sm">สามเว็บในราคา 359.
--</p>
-<div class="space-y-2 text-xs font-medium">
-<div class="flex gap-2 bg-pj-white/20 p-2 rounded-xl">
-<span class="font-bold">1.
-</span>
-<div><p class="font-bold">Portfolio แนะนําตัว</p><p class="opacity-90">ระบุว่า
-ขายอะไร มีคอนแทคชัดเจน</p></div>
-</div>
-<div class="flex gap-2 bg-pj-white/20 p-2 rounded-xl">
-<span class="font-bold">2.
-</span>
-<div><p class="font-bold">ป้ายบัญชี</p><p class="opacity-90">มีปุ ่ มให ้ ลูกค ้ าคัด
-ลอกเลขบัญชีได ้ </p></div>
-</div>
-<div class="flex gap-2 bg-pj-white/20 p-2 rounded-xl">
-<span class="font-bold">3.
-</span>
-<div><p class="font-bold">เลือกเองได ้ (จากเทมเพลต)</p><p class="opacity-
-90">ตกเว็บละ 100 นิดๆ คุ ้ มมาก</p></div>
-</div>
-</div>
-</div>
-</section>
-<!-- Process & Rules (Mimicking "NOTA" card format) -->
-<section class="mx-4 space-y-4">
-<!-- Step Card -->
-<div class="shape-nota bg-pj-white border-2 border-pj-blue-main p-5 shadow-sm">
-<!-- ดาวตกแต่ง Process -->
-<svg class="absolute -top-3 -right-2 w-7 h-7 text-pj-pink z-10 drop-shadow-sm
-transform rotate-12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L15.09 8.26L22
-9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12
-2Z"/></svg>
-<div class="flex justify-between items-start mb-3">
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
 <div>
-<h3 class="font-eng text-xl font-bold text-pj-blue-main uppercase">Process &
-Conditions</h3>
-<p class="text-xs font-medium text-pj-blue-dark/70">ขั้นตอนและเงื่อนไข</p>
-</div>
-<div class="bg-pj-yellow-light text-pj-blue-dark px-2 py-1 rounded-lg">
-<svg width="20" height="20" viewBox="0 0 24 24" fill="none"
-stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8
-10z"/></svg>
-</div>
-</div>
-<ul class="text-xs space-y-2 pl-4 list-disc marker:text-pj-blue-main">
-<li>ตามปกติรองาน 4–8 ชั่วโมง แล ้ วแต่คิวของวันนั้น ๆ</li>
-<li><span class="font-bold text-pj-pink">งานเร่ง *2 ของราคา</span></li>
-<li>สามารถแคปหน ้ าเว็บที่อยากได ้ ของร ้ านเรา มาเป ็ นเรฟได ้ หากไม่แคป แล ้ วแก ้ เยอะ จะ
-ทําให ้ กระทบคิวถัดไป</li>
-<li>เน ้ นยํ้าหลังจากส่งงานให ้ รีเช็ค ตอบกลับภายในไม่เกิน 30 นาที</li>
-<li>หากไม่เลือกเทมเพลตแล ้ วอยากให ้ ออกแบบใหม่เป ็ นแนวเฉพาะของร ้ านนั้นๆ บวกเพิ่ม
-200 บาท</li>
+<h4 style="color: var(--bg-sidebar); margin-bottom: 10px;">📋 ขั้นตอนการสั่ง</h4>
+<ul style="font-size: 13px;">
+<li>- กรอกฟอร์ม เขียนรายละเอียดร้านค้า</li>
+<li>- ใส่ลิงก์ ตัวอย่างงานมาให้พร้อม หากมีโลโก้ให้แนบมา</li>
+<li>- ส่งงานให้เช็ค แจ้งยอด ชำระเงิน</li>
+<li>- รอรับลิงก์ได้เลยค่า</li>
 </ul>
-rounded">ขั้นตอนการสั่ง</h4>
-marker:font-bold">
-<h4 class="font-bold text-sm mt-4 mb-2 bg-pj-blue-light/30 inline-block px-2 py-0.5
-<ol class="text-xs space-y-2 pl-4 list-decimal marker:text-pj-blue-main
-<li>เขียนรายละเอียดร ้ านค ้ า หรือพิมพ์ข ้ อมูลร ้ านค ้ าส่งมาได ้ เลย อยากใส่อะไร ใส่ได ้ ทุก
-อย่าง</li>
-<li>ใส่ลิงก์ตัวอย่างงานมาเลย หากมีโลโก ้ ให ้ แนบมาทีหลังใส่ Google Drive เท่านั้น</li>
-<li>ชําระเงินราคาเริ่มต ้ นที่ 129.
-- ส่งงานให ้ เช็ค หากเกินจะแจ ้ งยอดที่เหลือให ้ ชําระเพิ่ม
-</li>
-<li>รอรับลิงก์</li>
-</ol>
-<div class="mt-3 bg-pj-yellow-light/50 p-2 rounded text-[10px]
-text-pj-blue-dark/80">
-<span class="font-bold">หมายเหตุ:</span> เนื่องจากข ้ อมูลของแต่ละบุคคลมากน ้ อย
-ไม่เท่ากัน จึงคิดราคาก่อนส่งงานไม่ได ้ ค่ะ ทางร ้ านไม่รับเปลี่ยนโดเมนนะคะ
+</div>
+<div>
+<h4 style="color: var(--bg-sidebar); margin-bottom: 10px;">📋 เงื่อนไข</h4>
+<p style="font-size: 13px;">
+• รองาน 4-24 ชั่วโมง แล้วแต่คิว<br>
+• งานเร่ง *2 ของราคา
+</p>
 </div>
 </div>
-<!-- Rules Card -->
-<div class="shape-nota bg-pj-blue-dark text-pj-white p-5 shadow-sm
-overflow-hidden">
-<!-- ดาวตกแต่ง Rules -->
-<svg class="absolute -bottom-4 -left-4 w-16 h-16 text-pj-blue-light opacity-10
-transform -rotate-12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L15.09
-8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12
-2Z"/></svg>
-<svg class="absolute top-4 right-4 w-5 h-5 text-pj-yellow-main opacity-80"
-viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L15.09 8.26L22 9.27L17
-14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
-<div class="flex items-center gap-2 mb-3 border-b border-pj-white/20 pb-2">
-<svg width="20" height="20" viewBox="0 0 24 24" fill="none"
-stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71
-3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12"
-y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-<h3 class="font-eng text-lg font-bold uppercase tracking-widest">Rules</h3>
-</div>
-<ul class="text-xs space-y-2 font-light">
-<li class="flex items-start gap-2"><svg class="w-3 h-3 mt-0.5 shrink-0
-text-pj-pink" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> โอนเงินแล ้ วไม่คืนเงินทุกกรณี ไม่ว่า
-จะราคาเริ่มต ้ น หรือ จ่ายเต็มแล ้ ว</li>
-<li class="flex items-start gap-2"><svg class="w-3 h-3 mt-0.5 shrink-0
-text-pj-pink" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> ยกเลิกหลังตรวจงานแล ้ ว ไม่คืนเงิน
-และส่งงานให ้ ตามปกติ</li>
-<li class="flex items-start gap-2"><svg class="w-3 h-3 mt-0.5 shrink-0
-text-pj-pink" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> หากนําลิงก์ไปเปลี่ยนโดเมนแล ้ วมี
-ค่าใช ้ จ่ายเพิ่มเติม ทางร ้ านไม่รับผิดชอบทุกกรณี รับผิดชอบแค่ในส่วนของลิงก์มีปัญหา</li>
-<li class="flex items-start gap-2"><svg class="w-3 h-3 mt-0.5 shrink-0
-text-pj-pink" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> งดจิกงดเร่งทุกกรณีนะคะ เค ้ าติดงาน
-ประจําจะรีบตอบกลับให ้ เร็วที่สุดค่ะ (ปกติ 4-8 ชม.)</li>
-</ul>
+<div class="highlight-box" style="background-color: #fff5f5; border-left-color: #ff9999;">
+<h4 style="color: #d9534f;">📍 กฎของร้าน 📍</h4>
+<p style="font-size: 13px; color: #d9534f;">
+- โอนเงินแล้วไม่คืนเงินทุกกรณี<br>
+- ยกเลิกงานหลังส่งบรีฟ (เริ่มงานแล้ว) คืนเงิน 50%<br>
+- ยกเลิกหลังเช็คงาน ไม่คืนเงินและส่งงานตามปกติ
+</p>
 </div>
 </section>
-<!-- Course Section (Floating tag style) -->
-<section class="ml-10 mr-4 relative">
-<div class="absolute -left-6 top-1/2 w-6 border-b-2 border-pj-blue-main"></div>
-<div class="bg-gradient-to-r from-pj-yellow-light to-pj-white p-4 rounded-2xl
-shadow-soft border border-pj-yellow-main/30 relative">
-<!-- ดาวตกแต่ง Course -->
-<svg class="absolute -bottom-2 -left-3 w-7 h-7 text-pj-blue-main z-10
-drop-shadow-sm transform -rotate-12" viewBox="0 0 24 24" fill="currentColor"><path
-d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2
-9.27L8.91 8.26L12 2Z"/></svg>
-<div class="absolute -top-3 -right-2 bg-pj-pink text-pj-white text-[10px] font-bold
-px-2 py-1 rounded-full transform rotate-12">
-SALE!
-</div>
-<h3 class="font-bold text-sm mb-1 text-pj-blue-main">คอร์สสอนทําเว็บร ้ าน สไตล์พิ้งจู
-</h3>
-<p class="text-xs mb-2">สอนตั้งแต่ 0 → ทําเป ็ นเว็บใช ้ งานได ้ จริง มีเทมเพลตมากกว่า 20
-แบบ แทบจะจับมือสอน</p>
-<div class="flex items-center justify-between mb-2">
-<span class="text-sm font-bold text-pj-pink line-through
-opacity-60">399.
--</span>
-<span class="text-lg font-bold bg-pj-blue-dark text-pj-white px-3 py-0.5
-rounded-lg">299.
--</span>
-</div>
-<div class="flex gap-2">
-<a
-href="https://drive.google.com/drive/folders/1fj024BhkgC1ctJeiwyZUG3USteSdzWzr"
-target="
-_
-blank" class="flex-1 bg-pj-blue-light/50 text-center py-1.5 rounded-lg text-xs
-font-semibold hover:bg-pj-blue-light transition">ดูรายละเอียด</a>
-<a href="https://purple-wind-aced.cozyw75.workers.dev/" target="
-blank"
-_
-class="flex-1 bg-pj-blue-light/50 text-center py-1.5 rounded-lg text-xs font-semibold
-hover:bg-pj-blue-light transition">อ่านกฎเพิ่มเติม</a>
 </div>
 </div>
-</section>
-<!-- Goodnotes Section -->
-<section class="mx-4 mt-6 relative">
-<!-- ของตกแต่งหัวข ้ อ Goodnote -->
-<svg class="absolute -top-2 right-6 w-8 h-8 text-pj-yellow-main opacity-80"
-viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L15.09 8.26L22 9.27L17
-14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
-<div class="text-center mb-6 relative">
-<div class="absolute top-1/2 left-0 w-full h-0.5 bg-pj-blue-light/50 -z-10"></div>
-<h2 class="font-eng text-3xl font-bold text-pj-blue-dark inline-block bg-pj-bg px-4
-shadow-sm rounded-full border border-pj-blue-light">Goodnote</h2>
-</div>
-<div class="grid gap-4">
-<!-- Special Version -->
-<div class="bg-pj-white p-4 rounded-2xl shadow-sm border-t-4 border-pj-blue-main
-relative overflow-hidden">
-<!-- ดาวตกแต่ง Goodnote 1 -->
-<svg class="absolute bottom-2 right-2 w-10 h-10 text-pj-blue-light/20 transform
-rotate-12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L15.09 8.26L22 9.27L17
-14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
-<div class="absolute top-0 right-0 bg-pj-blue-main text-pj-white text-[10px]
-font-bold px-3 py-1 rounded-bl-xl">ถาวร (iOS)</div>
-<h3 class="font-bold text-lg mb-2 mt-1">รุ่นพิเศษ</h3>
-<ul class="text-xs space-y-1 mb-3 text-pj-blue-dark/80">
-<li>- สมุดโน๊ต ไวท์บอร์ด เอกสารไม่จํากัด</li>
-<li>- แชร์ลิ้งค์แบบสาธารณะ</li>
-<li>- การถอดเสียงแบบไม่จํากัด</li>
-</ul>
-<div class="flex flex-wrap gap-2 text-xs font-bold">
-<div class="bg-pj-blue-light/30 px-3 py-1 rounded-full">เมลรวม <span
-class="text-pj-blue-main">20.
--</span></div>
-<div class="bg-pj-yellow-light px-3 py-1 rounded-full">หาร 5 คน <span
-class="text-pj-blue-main">149.
--</span></div>
-<div class="bg-pj-pink/20 px-3 py-1 rounded-full">ส่วนตัว <span
-class="text-pj-pink">490.
--</span></div>
-</div>
-</div>
-<!-- Essential Version -->
-<div class="bg-pj-white p-4 rounded-2xl shadow-sm border-t-4
-border-pj-yellow-main relative overflow-hidden">
-<!-- ดาวตกแต่ง Goodnote 2 -->
-<svg class="absolute bottom-2 right-2 w-10 h-10 text-pj-yellow-main/20
-transform -rotate-12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L15.09
-8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12
-2Z"/></svg>
-<div class="absolute top-0 right-0 bg-pj-yellow-main text-pj-blue-dark text-[10px]
-font-bold px-3 py-1 rounded-bl-xl">รายป ี </div>
-<h3 class="font-bold text-lg mb-2 mt-1">แบบ Essential</h3>
-<p class="text-[10px] leading-tight mb-2 opacity-80">ปลดล็อควิธีการจดบันทึก
-ความคิดของคุณไม่ว่าจะเป ็ นข ้ อความ ลายมือ เสียง ไดอะแกรม</p>
-<ul class="text-xs space-y-1 mb-3 text-pj-blue-dark/80">
-<li>- สมุดโน๊ต ไวท์บอร์ด เอกสารไม่จํากัด</li>
-<li>- ค ้ นคว ้ าคณิตศาสตร์ด ้ วย AI (525 เครดิต)</li>
-<li>- ถอดเสียงไม่จํากัด</li>
-<li>- เข ้ าถึง Android, Win, Web, iOS</li>
-<li>- แชร์ลิ้งค์แบบสาธารณะ</li>
-</ul>
-<div class="flex flex-wrap gap-2 text-xs font-bold mb-2">
-<div class="bg-pj-blue-light/30 px-3 py-1 rounded-full">เมลรวม <span
-class="text-pj-blue-main">20.
--</span></div>
-<div class="bg-pj-yellow-light px-3 py-1 rounded-full">หาร 5 คน <span
-class="text-pj-blue-main">79.
--</span></div>
-<div class="bg-pj-pink/20 px-3 py-1 rounded-full">ส่วนตัว <span
-class="text-pj-pink">229.
--</span></div>
-</div>
-<p class="text-[9px] text-pj-pink font-semibold bg-pj-pink/10 p-1 rounded inline-
-block">*ใช ้ งานระบบแอนดรอยด์/วินโดว์/เว็บ แนะนําแบบส่วนตัว</p>
-</div>
-<!-- Pro Version -->
-<div class="bg-pj-white p-4 rounded-2xl shadow-sm border-t-4 border-pj-pink
-relative overflow-hidden">
-<!-- ดาวตกแต่ง Goodnote 3 -->
-<svg class="absolute bottom-2 right-2 w-10 h-10 text-pj-pink/20 transform
-rotate-12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L15.09 8.26L22 9.27L17
-14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
-<div class="absolute top-0 right-0 bg-pj-pink text-pj-white text-[10px] font-bold
-px-3 py-1 rounded-bl-xl">รายป ี </div>
-<h3 class="font-bold text-lg mb-2 mt-1">Pro</h3>
-<p class="text-[10px] leading-tight mb-2 opacity-80">เปลี่ยนการทํางานของคุณ
-ด ้ วยการสร ้ างสรรค์ด ้ วย ai และการทํางานร่วมกันขั้นสูง</p>
-<ul class="text-xs space-y-1 mb-3 text-pj-blue-dark/80">
-<li>- มีครบทุกอย่างใน essential</li>
-<li>- ค ้ นคว ้ าคณิตศาสตร์ด ้ วย AI (525 เครดิต)</li>
-<li>- จดบันทึก/สรุปอัตโนมัติแบบเรียลไทม์</li>
-<li>- เชื่อมต่อ Google ปฏิทิน</li>
-<li>- แชร์ลิ้งค์ส่วนตัว & ทํางานร่วมกัน</li>
-</ul>
-<div class="flex flex-wrap gap-2 text-xs font-bold mb-2">
-<div class="bg-pj-blue-light/30 px-3 py-1 rounded-full">เมลรวม <span
-class="text-pj-blue-main">20.
--</span></div>
-<div class="bg-pj-yellow-light px-3 py-1 rounded-full">หาร 5 คน <span
-class="text-pj-blue-main">149.
--</span></div>
-<div class="bg-pj-pink/20 px-3 py-1 rounded-full">ส่วนตัว <span
-class="text-pj-pink">490.
--</span></div>
-</div>
-<p class="text-[9px] text-pj-pink font-semibold bg-pj-pink/10 p-1 rounded inline-
-block">*ใช ้ งานระบบแอนดรอยด์/วินโดว์/เว็บ แนะนําแบบส่วนตัว</p>
-</div>
-</div>
-</section>
-<!-- Contact Section -->
-<section class="mt-8 mb-12 flex flex-col items-center">
-<h2 class="font-eng text-xl font-bold text-pj-blue-main mb-4 flex items-center gap-2">
-<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2
-2z"/></svg>
-Contact
-</h2>
-<div class="flex gap-4">
-<!-- FB -->
-<a href="https://www.facebook.com/profile.php?id=61554192600355"
-target="
-_
-blank" class="w-12 h-12 bg-pj-white border-2 border-pj-blue-light rounded-full flex
-items-center justify-center text-pj-blue-main hover:bg-pj-blue-light hover:text-pj-white
-transition-colors shadow-sm">
-<svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path
-d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
-</a>
-<!-- Line -->
-<a href="https://lin.ee/t0qYbAl" target="
-_
-blank" class="w-12 h-12 bg-pj-white
-border-2 border-pj-blue-light rounded-full flex items-center justify-center text-pj-blue-main
-hover:bg-pj-blue-light hover:text-pj-white transition-colors shadow-sm">
-<svg width="22" height="22" viewBox="0 0 24 24" fill="none"
-stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path
-d="M21 11.5a8.38 8.38 0 0 1-
-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-
-.9L3
-21l1.9-5.7a8.38 8.38 0 0 1-
-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-
-.9h.5a8.48 8.48 0
-0 1 8 8v.5z"/></svg>
-</a>
-<!-- IG -->
-<a href="https://www.instagram.com/pinkjulie.land" target="
-blank" class="w-12
-_
-h-12 bg-pj-white border-2 border-pj-blue-light rounded-full flex items-center justify-center
-text-pj-blue-main hover:bg-pj-blue-light hover:text-pj-white transition-colors shadow-sm">
-<svg width="22" height="22" viewBox="0 0 24 24" fill="none"
-stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect
-x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4
-0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
-</a>
-</div>
-<p class="text-xs font-semibold text-pj-blue-dark/60 mt-6">ขอบคุณที่ไว ้ วางใจ
-Pinkjulieland</p>
-</section>
 </main>
-<!-- Modals for Portfolio -->
-<!-- Modal: สดใส -->
-<div id="modal-sodsai" class="modal inactive fixed inset-0 z-50 flex items-center
-justify-center p-4">
-<div class="absolute inset-0 bg-pj-blue-dark/40 backdrop-blur-sm"
-onclick="closeModal('modal-sodsai')"></div>
-<div class="modal-content relative bg-pj-white w-full max-w-sm rounded-[30px] p-6
-shadow-xl border-4 border-pj-yellow-light">
-<button onclick="closeModal('modal-sodsai')" class="absolute top-4 right-4
-text-pj-blue-main hover:text-pj-pink">
-<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18"
-y2="18"/></svg>
-</button>
-<h3 class="font-eng text-xl font-bold text-pj-blue-main mb-4 border-b-2
-border-pj-blue-light/30 pb-2">Category: สดใส</h3>
-<div class="space-y-3">
-<a href="https://jeans.cozyw75.workers.dev/" target="
-blank" class="flex
-_
-items-center gap-2 p-3 bg-pj-bg rounded-xl hover:bg-pj-blue-light/20 transition group">
-<svg class="w-5 h-5 text-pj-yellow-main" viewBox="0 0 24 24"
-fill="currentColor"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12
-17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
-<span class="text-sm font-medium group-hover:text-pj-blue-main">สดใส V.1 ยีน
-ส์กระดุม</span>
-</a>
-<a href="https://playing.cozyw75.workers.dev/" target="
-blank" class="flex
-_
-items-center gap-2 p-3 bg-pj-bg rounded-xl hover:bg-pj-blue-light/20 transition group">
-<svg class="w-5 h-5 text-pj-yellow-main" viewBox="0 0 24 24"
-fill="currentColor"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12
-17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
-<span class="text-sm font-medium group-hover:text-pj-blue-main">สดใส V.2 กด
-เข ้ าสู่ร ้ าน</span>
-</a>
-<a href="https://note.cozyw75.workers.dev/" target="
-blank" class="flex
-_
-items-center gap-2 p-3 bg-pj-bg rounded-xl hover:bg-pj-blue-light/20 transition group">
-<svg class="w-5 h-5 text-pj-yellow-main" viewBox="0 0 24 24"
-fill="currentColor"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12
-17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
-<span class="text-sm font-medium group-hover:text-pj-blue-main">สดใส V.3
-โน ้ ตเหลี่ยม 1</span>
-</a>
-<a href="https://sodsai.cozyw75.workers.dev/" target="
-blank" class="flex
-_
-items-center gap-2 p-3 bg-pj-bg rounded-xl hover:bg-pj-blue-light/20 transition group">
-<svg class="w-5 h-5 text-pj-yellow-main" viewBox="0 0 24 24"
-fill="currentColor"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12
-17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
-<span class="text-sm font-medium group-hover:text-pj-blue-main">สดใส V.4
-โน ้ ตเหลี่ยม 2</span>
-</a>
 </div>
-</div>
-</div>
-<!-- Modal: โทนมืด -->
-<div id="modal-dark" class="modal inactive fixed inset-0 z-50 flex items-center
-justify-center p-4">
-<div class="absolute inset-0 bg-pj-blue-dark/40 backdrop-blur-sm"
-onclick="closeModal('modal-dark')"></div>
-<div class="modal-content relative bg-pj-white w-full max-w-sm max-h-[80vh]
-overflow-y-auto rounded-[30px] p-6 shadow-xl border-4 border-pj-blue-light">
-<button onclick="closeModal('modal-dark')" class="absolute top-4 right-4
-text-pj-blue-main hover:text-pj-pink">
-<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18"
-y2="18"/></svg>
-</button>
-<h3 class="font-eng text-xl font-bold text-pj-blue-dark mb-4 border-b-2
-border-pj-blue-light/30 pb-2">Category: โทนมืด</h3>
-<div class="space-y-2">
-<a href="https://pinkdark.cozyw75.workers.dev/" target="
-blank" class="flex
-_
-items-center gap-2 p-2.5 bg-pj-bg rounded-xl hover:bg-pj-blue-light/20 transition group">
-<svg class="w-4 h-4 text-pj-blue-dark" viewBox="0 0 24 24"
-fill="currentColor"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
-<span class="text-sm font-medium group-hover:text-pj-blue-main">โทนมืด
-V.1</span>
-</a>
-<a href="https://pinkblue.cozyw75.workers.dev/" target="
-blank" class="flex
-_
-items-center gap-2 p-2.5 bg-pj-bg rounded-xl hover:bg-pj-blue-light/20 transition group">
-<svg class="w-4 h-4 text-pj-blue-dark" viewBox="0 0 24 24"
-fill="currentColor"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
-<span class="text-sm font-medium group-hover:text-pj-blue-main">โทนมืด
-V.2</span>
-</a>
-<a href="https://dd3.cozyw75.workers.dev/" target="
-blank" class="flex
-_
-items-center gap-2 p-2.5 bg-pj-bg rounded-xl hover:bg-pj-blue-light/20 transition group">
-<svg class="w-4 h-4 text-pj-blue-dark" viewBox="0 0 24 24"
-fill="currentColor"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
-<span class="text-sm font-medium group-hover:text-pj-blue-main">โทนมืด
-V.3</span>
-</a>
-<a href="https://jugame.cozyw75.workers.dev/" target="
-blank" class="flex
-_
-items-center gap-2 p-2.5 bg-pj-bg rounded-xl hover:bg-pj-blue-light/20 transition group">
-<svg class="w-4 h-4 text-pj-blue-dark" viewBox="0 0 24 24"
-fill="currentColor"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
-<span class="text-sm font-medium group-hover:text-pj-blue-main">โทนมืด
-V.4</span>
-</a>
-<a href="https://moonpink.cozyw75.workers.dev/" target="
-blank" class="flex
-_
-items-center gap-2 p-2.5 bg-pj-bg rounded-xl hover:bg-pj-blue-light/20 transition group">
-<svg class="w-4 h-4 text-pj-blue-dark" viewBox="0 0 24 24"
-fill="currentColor"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
-<span class="text-sm font-medium group-hover:text-pj-blue-main">โทนมืด V.5
-พระจันทร์</span>
-</a>
-<a href="https://shiny-thunder-d71e.cozyw75.workers.dev/" target="
-blank"
-_
-class="flex items-center gap-2 p-2.5 bg-pj-bg rounded-xl hover:bg-pj-blue-light/20 transition
-group">
-<svg class="w-4 h-4 text-pj-blue-dark" viewBox="0 0 24 24"
-fill="currentColor"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
-<span class="text-sm font-medium group-hover:text-pj-blue-main">โทนมืด V.6
-Start</span>
-</a>
-<a href="https://blue.cozyw75.workers.dev/" target="
-blank" class="flex
-_
-items-center gap-2 p-2.5 bg-pj-bg rounded-xl hover:bg-pj-blue-light/20 transition group">
-<svg class="w-4 h-4 text-pj-blue-dark" viewBox="0 0 24 24"
-fill="currentColor"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
-<span class="text-sm font-medium group-hover:text-pj-blue-main">โทนมืด V.7 สี
-ฟ้า</span>
-</a>
-<a href="https://lix.cozyw75.workers.dev/" target="
-blank" class="flex items-center
-_
-gap-2 p-2.5 bg-pj-bg rounded-xl hover:bg-pj-blue-light/20 transition group">
-<svg class="w-4 h-4 text-pj-blue-dark" viewBox="0 0 24 24"
-fill="currentColor"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
-<span class="text-sm font-medium group-hover:text-pj-blue-main">โทนมืด V.8
-ดูดวง</span>
-</a>
-</div>
-</div>
-</div>
-<!-- Modal: พาสเทล -->
-<div id="modal-pastel" class="modal inactive fixed inset-0 z-50 flex items-center
-justify-center p-4">
-<div class="absolute inset-0 bg-pj-blue-dark/40 backdrop-blur-sm"
-onclick="closeModal('modal-pastel')"></div>
-<div class="modal-content relative bg-pj-white w-full max-w-sm max-h-[80vh]
-overflow-y-auto rounded-[30px] p-6 shadow-xl border-4 border-pj-pink">
-<button onclick="closeModal('modal-pastel')" class="absolute top-4 right-4
-text-pj-blue-main hover:text-pj-pink">
-<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18"
-y2="18"/></svg>
-</button>
-<h3 class="font-eng text-xl font-bold text-pj-pink mb-4 border-b-2
-border-pj-blue-light/30 pb-2">Category: พาสเทล</h3>
-<div class="space-y-2">
-<a href="https://wish-uwu.cozyw75.workers.dev/" target="
-blank" class="flex
-_
-items-center gap-2 p-2.5 bg-pj-bg rounded-xl hover:bg-pj-pink/10 transition group">
-<svg class="w-4 h-4 text-pj-pink" viewBox="0 0 24 24" fill="currentColor"><path
-d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06
-1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-<span class="text-sm font-medium group-hover:text-pj-pink">พาสเทล
-V.1</span>
-</a>
-<a href="https://regal-torrone-46c94f.netlify.app/" target="
-blank" class="flex
-_
-items-center gap-2 p-2.5 bg-pj-bg rounded-xl hover:bg-pj-pink/10 transition group">
-<svg class="w-4 h-4 text-pj-pink" viewBox="0 0 24 24" fill="currentColor"><path
-d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06
-1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-<span class="text-sm font-medium group-hover:text-pj-pink">พาสเทล
-V.2</span>
-</a>
-<a href="https://cawaei.cozyw75.workers.dev/" target="
-blank" class="flex
-_
-items-center gap-2 p-2.5 bg-pj-bg rounded-xl hover:bg-pj-pink/10 transition group">
-<svg class="w-4 h-4 text-pj-pink" viewBox="0 0 24 24" fill="currentColor"><path
-d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06
-1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-<span class="text-sm font-medium group-hover:text-pj-pink">พาสเทล V.3
-สติกเกอร์</span>
-</a>
-<a href="https://meww.cozyw75.workers.dev/" target="
-blank" class="flex
-_
-items-center gap-2 p-2.5 bg-pj-bg rounded-xl hover:bg-pj-pink/10 transition group">
-<svg class="w-4 h-4 text-pj-pink" viewBox="0 0 24 24" fill="currentColor"><path
-d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06
-1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-<span class="text-sm font-medium group-hover:text-pj-pink">พาสเทล V.4 แมวดํา
-</span>
-</a>
-<a href="https://duduw.cozyw75.workers.dev/" target="
-blank" class="flex
-_
-items-center gap-2 p-2.5 bg-pj-bg rounded-xl hover:bg-pj-pink/10 transition group">
-<svg class="w-4 h-4 text-pj-pink" viewBox="0 0 24 24" fill="currentColor"><path
-d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06
-1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-<span class="text-sm font-medium group-hover:text-pj-pink">พาสเทล V.5
-เปเปอร์</span>
-</a>
-<a href="https://pinks.cozyw75.workers.dev/" target="
-blank" class="flex
-_
-items-center gap-2 p-2.5 bg-pj-bg rounded-xl hover:bg-pj-pink/10 transition group">
-<svg class="w-4 h-4 text-pj-pink" viewBox="0 0 24 24" fill="currentColor"><path
-d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06
-1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-<span class="text-sm font-medium group-hover:text-pj-pink">พาสเทล V.6 หมี
-กระดุม</span>
-</a>
-<a href="https://small-wind-001f.cozyw75.workers.dev/" target="
-blank"
-_
-class="flex items-center gap-2 p-2.5 bg-pj-bg rounded-xl hover:bg-pj-pink/10 transition
-group">
-<svg class="w-4 h-4 text-pj-pink" viewBox="0 0 24 24" fill="currentColor"><path
-d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06
-1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-<span class="text-sm font-medium group-hover:text-pj-pink">พาสเทล V.7
-โลโก ้ เหลี่ยม</span>
-</a>
-<a href="https://sweetie.cozyw75.workers.dev/" target="
-blank" class="flex
-_
-items-center gap-2 p-2.5 bg-pj-bg rounded-xl hover:bg-pj-pink/10 transition group">
-<svg class="w-4 h-4 text-pj-pink" viewBox="0 0 24 24" fill="currentColor"><path
-d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06
-1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-<span class="text-sm font-medium group-hover:text-pj-pink">พาสเทล V.8 โพลา
-รอยด์</span>
-</a>
-<a href="https://pmju.cozyw75.workers.dev/" target="
-blank" class="flex
-_
-items-center gap-2 p-2.5 bg-pj-bg rounded-xl hover:bg-pj-pink/10 transition group">
-<svg class="w-4 h-4 text-pj-pink" viewBox="0 0 24 24" fill="currentColor"><path
-d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06
-1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-<span class="text-sm font-medium group-hover:text-pj-pink">พาสเทล V.9
-Payment</span>
-</a>
-</div>
-</div>
-</div>
+
 <script>
-function openModal(id) {
-const modal = document.getElementById(id);
-modal.classList.remove('inactive');
-modal.classList.add('active');
-document.body.style.overflow = 'hidden'; // Prevent background scrolling
-}
-function closeModal(id) {
-const modal = document.getElementById(id);
-modal.classList.remove('active');
-modal.classList.add('inactive');
-document.body.style.overflow = ''; // Restore scrolling
-}
+function openModal(id) { document.getElementById(id).classList.add('active'); document.body.style.overflow = 'hidden'; }
+function closeModal(id) { document.getElementById(id).classList.remove('active'); document.body.style.overflow = 'auto'; }
+window.onclick = function(event) { if (event.target.classList.contains('modal-overlay')) { event.target.classList.remove('active'); document.body.style.overflow = 'auto'; } }
 </script>
 </body>
 </html>
