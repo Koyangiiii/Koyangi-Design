@@ -2,184 +2,178 @@
 <html lang="th">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>🎨 koyangi - Official Store</title>
-<!-- Fonts -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>koyangi - รับออกแบบป้าย & เว็บไซต์</title>
+<script src="https://cdn.tailwindcss.com"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Mitr:wght@300;400;500;600;700&family=Prompt:wght@300;400;500;600&display=swap" rel="stylesheet">
-<!-- Icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-<!-- Tailwind CSS -->
-<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Mitr:wght@300;400;500;600&display=swap" rel="stylesheet">
 <script>
 tailwind.config = {
 theme: {
 extend: {
 fontFamily: {
-sans: ['Mitr', 'sans-serif'],
-cute: ['Mitr', 'sans-serif'],
+'mitr': ['Mitr', 'sans-serif'],
+'fredoka': ['Fredoka', 'sans-serif'],
 },
 colors: {
-p_bg: '#fff5f8', /* พื้นหลังชมพูอ่อนสุด */
-p_card_main: '#ff99bb', /* ชมพูหลักสดใส */
-p_card_light: '#ffcce0', /* ชมพูพาสเทล */
-p_card_dark: '#f06292', /* ชมพูเข้ม */
-p_white_glow: '#ffffff',
-p_text: '#884455' /* ตัวอักษรโทนน้ำตาลแดง/ชมพูเข้มเพื่อให้เข้ากัน */
+'pj-bg': '#fff5f7',
+'pj-blue-light': '#ffc2d1',
+'pj-blue-main': '#ff8fab',
+'pj-blue-dark': '#8c3b4f',
+'pj-yellow-light': '#ffe5ec',
+'pj-yellow-main': '#fb6f92',
+'pj-pink': '#ffb3c6',
+'pj-white': '#ffffff',
 },
 boxShadow: {
-'pop': '4px 4px 0px rgba(240, 98, 146, 0.25)',
-'pop-hover': '6px 6px 0px rgba(240, 98, 146, 0.35)',
-'glow': '0 0 15px rgba(255, 255, 255, 0.8)'
+'soft': '0 10px 40px -10px rgba(251, 111, 146, 0.3)',
+'hard': '4px 4px 0px 0px rgba(140, 59, 79, 0.2)',
 }
 }
 }
 }
 </script>
 <style>
-body { display: flex; justify-content: center; color: #884455; margin: 0; min-height: 100vh; background-color: #fce4ec; }
-#app-container { width: 100%; max-width: 430px; min-height: 100vh; background-color: #fff5f8; background-image: radial-gradient(#ffcce0 1.5px, transparent 1.5px); background-size: 20px 20px; position: relative; overflow-x: hidden; box-shadow: 0 0 30px rgba(240, 98, 146, 0.3); }
-@keyframes float { 0%, 100% { transform: translateY(0px) rotate(0deg); } 50% { transform: translateY(-8px) rotate(3deg); } }
-@keyframes spin-slow { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-@keyframes pulse-glow { 0%, 100% { opacity: 0.6; transform: scale(1); } 50% { opacity: 1; transform: scale(1.1); } }
-.animate-float { animation: float 3s ease-in-out infinite; }
-.animate-spin-slow { animation: spin-slow 15s linear infinite; }
-.animate-pulse-glow { animation: pulse-glow 4s ease-in-out infinite; }
-.pop-card { transition: transform 0.2s ease; }
-.pop-card:active { transform: scale(0.97); }
-.speech-bubble { position: relative; }
-.speech-bubble::before { content: ''; position: absolute; left: 50%; transform: translateX(-50%); top: -12px; border-left: 12px solid transparent; border-right: 12px solid transparent; border-bottom: 15px solid #ff99bb; }
-::-webkit-scrollbar { display: none; }
-@keyframes driftRight { 0% { left: -20%; transform: translateY(0) rotate(0deg); opacity: 0; } 15% { opacity: 0.8; } 85% { opacity: 0.8; } 100% { left: 120%; transform: translateY(-40px) rotate(180deg); opacity: 0; } }
-@keyframes driftLeft { 0% { right: -20%; transform: translateY(0) rotate(0deg); opacity: 0; } 15% { opacity: 0.6; } 85% { opacity: 0.6; } 100% { right: 120%; transform: translateY(50px) rotate(-180deg); opacity: 0; } }
-.animate-drift-r { animation: driftRight 16s linear infinite; }
-.animate-drift-l { animation: driftLeft 20s linear infinite; }
-.animate-drift-r-slow { animation: driftRight 25s linear infinite; animation-delay: -7s; }
-.animate-drift-l-slow { animation: driftLeft 28s linear infinite; animation-delay: -12s; }
+body { font-family: 'Mitr', sans-serif; background-color: #fff5f7; overflow-x: hidden; color: #8c3b4f; }
+.font-eng { font-family: 'Fredoka', sans-serif; }
+.shape-header { border-radius: 40px 100px 100px 40px; position: relative; }
+.shape-info { border-radius: 20px; }
+.shape-bubble-left { border-radius: 20px; position: relative; }
+.shape-bubble-left::after { content: ''; position: absolute; right: -15px; top: 50%; transform: translateY(-50%); border-width: 15px 0 15px 20px; border-color: transparent transparent transparent #ff8fab; }
+.shape-nota { border-radius: 20px; position: relative; }
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #ffc2d1; border-radius: 10px; }
+.modal { transition: opacity 0.3s ease, visibility 0.3s ease; }
+.modal.active { opacity: 1; visibility: visible; }
+.modal.inactive { opacity: 0; visibility: hidden; }
+.modal-content { transition: transform 0.3s ease; transform: scale(0.95); }
+.modal.active .modal-content { transform: scale(1); }
+.bg-shapes { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -1; pointer-events: none; overflow: hidden; }
 </style>
 </head>
-<body class="antialiased font-sans">
-<div id="app-container">
-    <!-- Animation Icons (คงไว้ 100%) -->
-    <div class="absolute top-12 animate-drift-r text-white text-3xl pointer-events-none z-0"><i class="fa-solid fa-heart drop-shadow-md"></i></div>
-    <div class="absolute top-32 animate-drift-l text-p_card_light text-4xl pointer-events-none z-0"><i class="fa-solid fa-star"></i></div>
-    <div class="absolute top-80 animate-drift-r-slow text-p_card_light text-2xl pointer-events-none z-0"><i class="fa-solid fa-paw"></i></div>
+<body class="antialiased relative selection:bg-pj-pink selection:text-pj-white">
+<div class="bg-shapes">
+    <!-- Background Decors คงเดิมแต่ปรับสีชมพู -->
+    <svg class="absolute top-10 -left-10 w-64 h-64 text-pj-blue-light opacity-50" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M44.7,-76.4C58.8,-69.2,71.8,-59.1,81.3,-46.3C90.8,-33.5,96.8,-18,95.5,-2.9C94.2,12.2,85.6,26.9,75.3,39.6C65,52.3,53,63.1,39.4,70.5C25.8,77.9,10.6,81.9,-4.3,81.4C-19.2,80.9,-33.7,75.9,-47.5,68.4C-61.3,60.9,-74.3,50.9,-82.4,37.6C-90.5,24.3,-93.7,7.7,-91.4,-8.2C-89.1,-24.1,-81.3,-39.3,-69.9,-51.1C-58.5,-62.9,-43.5,-71.3,-29.1,-75.7C-14.7,-80.1,-1.2,-80.5,12.5,-78.9C26.2,-77.3, 30.6,-83.6, 44.7,-76.4Z" transform="translate(100 100) scale(1.1)" /></svg>
+    <svg class="absolute top-[40%] right-[-50px] w-72 h-72 text-pj-yellow-light opacity-60" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M51.8,-70.5C65.5,-60.8,73.9,-43.8,77.9,-26.8C81.9,-9.8,81.5,7.2,74.9,21.8C68.3,36.4,55.5,48.6,41.2,57.1C26.9,65.6,11.1,70.4,-4.1,76.3C-19.3,82.2,-33.9,89.2,-46.9,82.9C-59.9,76.6,-71.3,57,-76.3,38.2C-81.3,19.4,-79.9,1.4,-73.4,-14.2C-66.9,-29.8,-55.3,-43,-41.8,-52.5C-28.3,-62,-14.1,-67.8,1.5,-70.1C17.1,-72.4,38.1,-80.2,51.8,-70.5Z" transform="translate(100 100)" /></svg>
+</div>
 
-    <main class="px-5 py-8 relative z-10">
-        <!-- Header (คงโครงสร้างเดิม) -->
-        <div class="text-center mb-6 relative">
-            <h1 class="font-cute text-[2.75rem] font-bold tracking-wider inline-block relative text-white leading-none mt-2">
-                <span class="text-p_card_dark drop-shadow-[2px_2px_0_#fff]">k</span>
-                <span class="text-white drop-shadow-[2px_2px_0_#ff99bb]">o</span>
-                <span class="text-p_card_main drop-shadow-[2px_2px_0_#fff]">y</span>
-                <span class="text-white drop-shadow-[2px_2px_0_#ffcce0]">a</span>
-                <span class="text-p_card_light drop-shadow-[2px_2px_0_#f06292]">n</span>
-                <span class="text-p_card_dark drop-shadow-[2px_2px_0_#fff]">g</span>
-                <span class="text-white drop-shadow-[2px_2px_0_#ff99bb]">i</span>
-            </h1>
-            <p class="font-cute text-p_card_dark text-sm mt-1 rotate-[-2deg] opacity-80">รับออกแบบป้าย ลายน้ำ Google Sheet เว็บไซต์ ⭐️</p>
-        </div>
-
-        <!-- Profile / Welcome Section -->
-        <div class="flex flex-col items-center mb-8">
-            <div class="bg-p_card_main rounded-[24px] p-5 shadow-pop w-full text-white mt-2">
-                <div class="flex justify-between items-center mb-3">
-                    <h2 class="font-cute text-xl font-bold drop-shadow-sm">🎨 koyangi shop</h2>
-                    <a href="https://line.me/ti/p/LfBtdhlrVa" target="_blank" class="bg-white text-p_card_dark font-bold font-cute px-3 py-1 rounded-full active:scale-95 transition shadow-sm text-[11px]">
-                        <i class="fa-brands fa-line mr-1 text-p_card_main"></i> ติดต่อสอบถาม
-                    </a>
-                </div>
-                <div class="text-[13px] space-y-2 text-[#fff] leading-snug font-medium">
-                    <p>รับออกแบบงานกราฟิกครบวงจร ไม่ว่าจะเป็น <strong class="underline">ป้าย ลายน้ำ โลโก้ Google Sheet และ Website</strong> งานคุณภาพในราคาน่ารักค่ะ</p>
-                    <div class="bg-white/20 backdrop-blur-sm inline-block px-3 py-1.5 rounded-xl mt-1 text-white text-[11px] border border-white/30">
-                        <i class="fa-solid fa-clock mr-1"></i> ปกติรองาน 4-24 ชม. (งานเร่ง *2 ของราคา)
+<main class="max-w-[500px] mx-auto min-h-screen px-4 py-12 relative z-10 flex flex-col gap-8">
+    <!-- Header Section -->
+    <section class="relative">
+        <div class="absolute -right-4 top-[80%] w-12 h-32 border-r-4 border-b-4 border-pj-blue-light rounded-br-[40px] z-0"></div>
+        <div class="shape-header bg-pj-blue-light p-8 pr-16 shadow-soft z-10 relative mt-4 ml-[-20px] mr-4">
+            <div class="absolute -top-10 -right-4 z-30 transform rotate-3">
+                <svg class="absolute -top-4 -left-5 w-12 h-12 text-pj-yellow-main drop-shadow-md z-40" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
+                <div class="w-32 h-36 bg-pj-white p-2.5 pb-8 rounded shadow-lg border border-pj-blue-light/50 flex flex-col items-center relative">
+                    <div class="w-full h-full bg-pj-blue-light/20 overflow-hidden rounded-sm">
+                        <img src="https://placehold.co/150x150/ffb3c6/8c3b4f?text=koyangi" alt="โลโก้" class="w-full h-full object-cover">
                     </div>
                 </div>
             </div>
+            <h1 class="font-eng text-5xl text-pj-white font-bold tracking-wide drop-shadow-md mb-2 relative z-10">koyangi<br><span class="text-3xl ml-4">Official</span></h1>
+            <div class="inline-block bg-pj-blue-dark text-pj-white font-eng px-4 py-1.5 rounded-full text-sm mt-3 shadow-md relative z-10">Welcome to my shop</div>
         </div>
+        <p class="mt-6 ml-6 text-sm font-medium pr-4 relative z-10">รับออกแบบป้าย ลายน้ำ Google Sheet เว็บไซต์⭐️</p>
+    </section>
 
-        <!-- Order Steps (โครงสร้างเดิม - ข้อมูลใหม่) -->
-        <div class="space-y-3 mb-6">
-            <div class="bg-white rounded-[20px] p-4 shadow-pop text-p_text border border-p_card_light">
-                <h3 class="font-cute text-lg font-bold mb-3 text-p_card_dark"><i class="fa-solid fa-list-check text-p_card_main"></i> ขั้นตอนการสั่ง</h3>
-                <ul class="space-y-2.5 text-[12px] font-medium leading-snug">
-                    <li class="flex gap-2"><span class="bg-p_card_light text-p_card_dark w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 font-cute text-[10px]">1</span><p>กรอกฟอร์ม เขียนรายละเอียดร้านค้า</p></li>
-                    <li class="flex gap-2"><span class="bg-p_card_light text-p_card_dark w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 font-cute text-[10px]">2</span><p>ใส่ลิงก์ตัวอย่างงาน/โลโก้ที่ต้องการใช้มาให้พร้อม</p></li>
-                    <li class="flex gap-2"><span class="bg-p_card_light text-p_card_dark w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 font-cute text-[10px]">3</span><p>รอส่งงานให้เช็ค แจ้งยอด และชำระเงิน</p></li>
-                    <li class="flex gap-2"><span class="bg-p_card_light text-p_card_dark w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 font-cute text-[10px]">4</span><p>ชำระเงินเรียบร้อย รอรับลิงก์งานได้เลยค่า</p></li>
+    <!-- Status Bar (คงไว้ตามเงื่อนไข) -->
+    <div class="mx-4 bg-pj-white border-2 border-dashed border-pj-blue-main rounded-xl p-3 flex justify-between items-center text-xs font-bold">
+        <span>Status: รับงานปกติ</span>
+        <span class="text-pj-yellow-main underline cursor-pointer">เช็คคิวงานคลิก</span>
+    </div>
+
+    <!-- Services Section -->
+    <section class="relative ml-8">
+        <div class="absolute -top-3 right-6 bg-pj-yellow-light text-pj-blue-dark font-eng font-bold px-4 py-1 rounded-full text-xs shadow-sm z-20 border-2 border-pj-white flex items-center gap-1">Services</div>
+        <div class="shape-info bg-pj-white border-2 border-pj-blue-light p-6 shadow-soft relative z-10 flex gap-4">
+            <div class="flex-1">
+                <div class="flex items-center gap-2 mb-3">
+                    <h2 class="font-eng text-xl font-bold uppercase tracking-wider text-pj-blue-main">งานที่รับทำ</h2>
+                </div>
+                <ul class="text-xs space-y-2 mb-4 list-none pl-1">
+                    <li class="flex items-start gap-1"><svg class="w-3 h-3 mt-0.5 text-pj-pink shrink-0" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="8"/></svg> ป้าย ลายน้ำ โลโก้</li>
+                    <li class="flex items-start gap-1"><svg class="w-3 h-3 mt-0.5 text-pj-pink shrink-0" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="8"/></svg> Google Sheet</li>
+                    <li class="flex items-start gap-1"><svg class="w-3 h-3 mt-0.5 text-pj-pink shrink-0" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="8"/></svg> Website</li>
                 </ul>
             </div>
+            <div class="w-12 bg-pj-blue-light rounded-xl flex flex-col items-center justify-center py-4 text-pj-white shrink-0">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
+            </div>
+        </div>
+    </section>
 
-            <!-- Badges & Queue Buttons (คงไว้ 100%) -->
-            <a href="https://koyangiiii.github.io/Koyangi-Store/" target="_blank" class="bg-p_card_light text-p_card_dark rounded-[16px] p-3.5 flex items-center justify-between pop-card shadow-pop font-bold font-cute text-sm">
-                <span><i class="fa-solid fa-eye mr-2"></i> ดูตัวอย่างผลงาน 1</span>
-                <i class="fa-solid fa-arrow-right"></i>
+    <!-- Portfolio Section -->
+    <section class="relative mr-8 mt-4">
+        <div class="shape-bubble-left bg-pj-blue-main p-5 shadow-soft z-10 text-pj-white">
+            <div class="flex items-center gap-2 mb-3">
+                <h2 class="font-eng text-2xl font-bold tracking-wide">Portfolio</h2>
+            </div>
+            <p class="text-sm mb-4">ตัวอย่างงาน คลิ๊กปุ่มด้านล่างเพื่อดูผลงานเลยค่ะ</p>
+            <div class="flex flex-col gap-2">
+                <a href="https://koyangiiii.github.io/Koyangi-Store/" target="_blank" class="bg-pj-white text-pj-blue-dark py-2 px-4 rounded-full text-sm font-semibold flex justify-between items-center hover:bg-pj-yellow-light transition-colors">
+                    Koyangi Store
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="9 18 15 12 9 6"/></svg>
+                </a>
+                <a href="https://koyangiiii.github.io/Koyangi-Design/" target="_blank" class="bg-pj-white text-pj-blue-dark py-2 px-4 rounded-full text-sm font-semibold flex justify-between items-center hover:bg-pj-yellow-light transition-colors">
+                    Koyangi Design
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="9 18 15 12 9 6"/></svg>
+                </a>
+            </div>
+        </div>
+    </section>
+    <!-- Process Section -->
+    <section class="mx-4 space-y-4">
+        <div class="shape-nota bg-pj-white border-2 border-pj-blue-main p-5 shadow-sm">
+            <h3 class="font-eng text-xl font-bold text-pj-blue-main uppercase">Process & Conditions</h3>
+            <ul class="text-xs space-y-2 mt-3 pl-4 list-disc marker:text-pj-blue-main">
+                <li>ตามปกติรองาน 4-24 ชั่วโมง แล้วแต่คิวของวันนั้นๆ</li>
+                <li><span class="font-bold text-pj-pink">งานเร่ง *2 ของราคา</span></li>
+            </ul>
+            <h4 class="font-bold text-sm mt-4 mb-2 bg-pj-blue-light/30 inline-block px-2 py-0.5 rounded">ขั้นตอนการสั่ง</h4>
+            <ol class="text-xs space-y-2 pl-4 list-decimal marker:text-pj-blue-main marker:font-bold">
+                <li>กรอกฟอร์ม เขียนรายละเอียดร้านค้า</li>
+                <li>ใส่ลิงก์ ตัวอย่างงานมาให้พร้อม หากมีโลโก้ให้แนบมา</li>
+                <li>ส่งงานให้เช็ค แจ้งยอด ชำระเงิน</li>
+                <li>รอรับลิงก์ได้เลยค่า</li>
+            </ol>
+        </div>
+
+        <!-- Rules Card -->
+        <div class="shape-nota bg-pj-blue-dark text-pj-white p-5 shadow-sm overflow-hidden">
+            <div class="flex items-center gap-2 mb-3 border-b border-pj-white/20 pb-2">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                <h3 class="font-eng text-lg font-bold uppercase tracking-widest">Rules</h3>
+            </div>
+            <ul class="text-xs space-y-2 font-light">
+                <li class="flex items-start gap-2"><svg class="w-3 h-3 mt-0.5 shrink-0 text-pj-pink" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> ถ้าโอนเงินแล้วทางร้านไม่คืนเงินทุกกรณีนะคะ</li>
+                <li class="flex items-start gap-2"><svg class="w-3 h-3 mt-0.5 shrink-0 text-pj-pink" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> หากยกเงินงานหลังส่งบรีฟมาแล้ว หากงานเริ่มไปแล้วจะคืนแค่ 50% ค่ะ</li>
+                <li class="flex items-start gap-2"><svg class="w-3 h-3 mt-0.5 shrink-0 text-pj-pink" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> หากยกเลิกหลังจากเช็คงาน = ไม่คืน และส่งงานให้ตามปกติ</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="mt-8 mb-12 flex flex-col items-center">
+        <h2 class="font-eng text-xl font-bold text-pj-blue-main mb-4 flex items-center gap-2">Contact</h2>
+        <div class="flex gap-4">
+            <!-- FB -->
+            <a href="https://www.facebook.com/profile.php?id=61554192600355" target="_blank" class="w-12 h-12 bg-pj-white border-2 border-pj-blue-light rounded-full flex items-center justify-center text-pj-blue-main hover:bg-pj-blue-light transition-colors shadow-sm">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
             </a>
-
-            <a href="https://koyangiiii.github.io/Koyangi-Design/" target="_blank" class="bg-p_card_dark rounded-[16px] p-3.5 flex items-center justify-between pop-card shadow-pop">
-                <div class="flex items-center gap-3">
-                    <div class="bg-white w-8 h-8 rounded-full flex items-center justify-center text-p_card_dark text-sm">
-                        <i class="fa-solid fa-palette"></i>
-                    </div>
-                    <h4 class="font-cute text-white font-bold text-sm">ตัวอย่างผลงาน 2 ✨</h4>
-                </div>
-                <i class="fa-solid fa-chevron-right text-white text-sm"></i>
+            <!-- Line -->
+            <a href="https://line.me/ti/p/LfBtdhlrVa" target="_blank" class="w-12 h-12 bg-pj-white border-2 border-pj-blue-light rounded-full flex items-center justify-center text-pj-blue-main hover:bg-pj-blue-light transition-colors shadow-sm">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+            </a>
+            <!-- IG -->
+            <a href="https://www.instagram.com/k0yangi_ii?igsh=ZDBnemRmNmI5amcy&utm_source=qr" target="_blank" class="w-12 h-12 bg-pj-white border-2 border-pj-blue-light rounded-full flex items-center justify-center text-pj-blue-main hover:bg-pj-blue-light transition-colors shadow-sm">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
             </a>
         </div>
-
-        <!-- Rules Card (คงโครงสร้างเดิม - ข้อมูลใหม่) -->
-        <div class="bg-p_card_light rounded-[24px] p-5 shadow-pop relative overflow-hidden mb-4 border border-white/50">
-            <div class="absolute top-3 right-3 text-white text-3xl opacity-40"><i class="fa-solid fa-gavel"></i></div>
-            <div class="inline-block bg-white text-p_card_dark font-cute font-bold px-3 py-0.5 rounded-full mb-3 text-[11px] shadow-sm">
-                📍 กฎของร้าน 📍
-            </div>
-            <div class="space-y-2 text-[12px] text-p_text relative z-10">
-                <p class="bg-white/60 p-2 rounded-lg backdrop-blur-sm">โอนเงินแล้วทางร้านไม่คืนเงินทุกกรณีนะคะ</p>
-                <p class="bg-white/60 p-2 rounded-lg backdrop-blur-sm">ยกเลิกหลังส่งบรีฟ (งานเริ่มแล้ว) คืนเงิน 50%</p>
-                <p class="bg-white/60 p-2 rounded-lg backdrop-blur-sm">ยกเลิกหลังจากเช็คงาน = <strong class="text-p_card_dark">ไม่คืนเงิน</strong> และส่งงานตามปกติ</p>
-                <p class="bg-p_card_dark text-white p-1.5 rounded-lg font-bold text-center mt-2 shadow-pop text-[11px]">
-                    🌸 โอนเงิน = ยอมรับกฎของร้าน 🌸
-                </p>
-            </div>
-        </div>
-
-        <!-- Gallery / Social (คงโครงสร้างปุ่มกลมด้านบนและไอเทม 6 ช่อง) -->
-        <div class="mb-4">
-            <div class="inline-block bg-white text-p_card_dark font-cute font-bold px-4 py-1.5 rounded-full mb-4 text-sm shadow-pop transform -rotate-1 border border-p_card_light">
-                Contact Me (ช่องทางติดต่อ)
-            </div>
-            <div class="grid grid-cols-3 gap-2.5">
-                <!-- Facebook -->
-                <a href="https://www.facebook.com/profile.php?id=61554192600355" target="_blank" class="bg-white rounded-[16px] p-2 text-center pop-card shadow-pop border-2 border-dashed border-p_card_light">
-                    <div class="bg-p_card_light rounded-lg aspect-square mb-1.5 flex items-center justify-center text-2xl text-white">
-                        <i class="fa-brands fa-facebook"></i>
-                    </div>
-                    <h4 class="font-cute font-bold text-p_card_dark text-[10px]">Facebook</h4>
-                </a>
-                <!-- Line -->
-                <a href="https://line.me/ti/p/LfBtdhlrVa" target="_blank" class="bg-p_card_light rounded-[16px] p-2 text-center pop-card shadow-pop border-2 border-dashed border-white">
-                    <div class="bg-white/50 rounded-lg aspect-square mb-1.5 flex items-center justify-center text-2xl text-p_card_dark">
-                        <i class="fa-brands fa-line"></i>
-                    </div>
-                    <h4 class="font-cute font-bold text-p_card_dark text-[10px]">Line</h4>
-                </a>
-                <!-- Instagram -->
-                <a href="https://www.instagram.com/k0yangi_ii" target="_blank" class="bg-p_card_main rounded-[16px] p-2 text-center pop-card shadow-pop border-2 border-dashed border-white/50">
-                    <div class="bg-white/30 rounded-lg aspect-square mb-1.5 flex items-center justify-center text-2xl text-white">
-                        <i class="fa-brands fa-instagram"></i>
-                    </div>
-                    <h4 class="font-cute font-bold text-white text-[10px]">Instagram</h4>
-                </a>
-            </div>
-        </div>
-
-        <!-- Footer -->
-        <footer class="text-center py-4 border-t border-p_card_light mt-4 text-xs text-p_text font-cute">
-            <p>สอบถามได้ตลอด 24 ชม. เลยนะคะ ยินดีให้บริการค่ะ 💖</p>
-            <p class="text-[9px] mt-1 opacity-60">koyangi &copy; 2026</p>
-        </footer>
-    </main>
-</div>
+        <p class="text-xs font-semibold text-pj-blue-dark/60 mt-6">ขอบคุณที่ไว้วางใจ koyangi Store</p>
+    </section>
+</main>
 </body>
 </html>
