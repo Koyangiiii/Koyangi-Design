@@ -2,514 +2,184 @@
 <html lang="th">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>koyangi - Official Store</title>
-<!-- นําเข้า Fonts -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>🎨 koyangi - Official Store</title>
+<!-- Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Mitr:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Mitr:wght@300;400;500;600;700&family=Prompt:wght@300;400;500;600&display=swap" rel="stylesheet">
+<!-- Icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+theme: {
+extend: {
+fontFamily: {
+sans: ['Mitr', 'sans-serif'],
+cute: ['Mitr', 'sans-serif'],
+},
+colors: {
+p_bg: '#fff5f8', /* พื้นหลังชมพูอ่อนสุด */
+p_card_main: '#ff99bb', /* ชมพูหลักสดใส */
+p_card_light: '#ffcce0', /* ชมพูพาสเทล */
+p_card_dark: '#f06292', /* ชมพูเข้ม */
+p_white_glow: '#ffffff',
+p_text: '#884455' /* ตัวอักษรโทนน้ำตาลแดง/ชมพูเข้มเพื่อให้เข้ากัน */
+},
+boxShadow: {
+'pop': '4px 4px 0px rgba(240, 98, 146, 0.25)',
+'pop-hover': '6px 6px 0px rgba(240, 98, 146, 0.35)',
+'glow': '0 0 15px rgba(255, 255, 255, 0.8)'
+}
+}
+}
+}
+</script>
 <style>
-/*
---- Color Variables ---
-*/
-:root {
---bg-main: #FFFDE7; 
---bg-sidebar: #38C2B3; 
---bg-card: #FFFFFF; 
---banner-color: #B5E57A; 
---banner-pattern: #E3F8B3;
---text-dark: #2A4C48; 
---text-light: #6C8E8A; 
---text-white: #FFFFFF;
---accent-pink: #FFB3D9; 
---accent-yellow: #FFD54F; 
---accent-green: #AEE26C; 
---accent-teal: #38C2B3; 
---border-radius-lg: 30px;
---border-radius-md: 20px;
---border-radius-sm: 12px;
---shadow-card: 0 10px 30px rgba(56, 194, 179, 0.08);
---shadow-hover: 0 15px 35px rgba(56, 194, 179, 0.15);
-}
-
-* {
-margin: 0;
-padding: 0;
-box-sizing: border-box;
-}
-
-body {
-font-family: 'Mitr', sans-serif !important;
-background-color: var(--bg-main);
-color: var(--text-dark);
-line-height: 1.6;
-overflow-x: hidden;
-background-image: radial-gradient(var(--banner-pattern) 2px, transparent 2px);
-background-size: 30px 30px;
-}
-h1, h2, h3, h4, h5, .english-text {
-font-family: 'Fredoka', 'Mitr', sans-serif !important;
-}
-a { text-decoration: none; color: inherit; }
-ul { list-style: none; }
-button { cursor: pointer; border: none; font-family: inherit; }
-
-/* --- Custom Scrollbar --- */
-::-webkit-scrollbar { width: 8px; }
-::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: var(--accent-pink); border-radius: 10px; }
-
-/* --- Layout Structure --- */
-.app-container {
-display: flex;
-min-height: 100vh;
-max-width: 1200px;
-margin: 0 auto;
-position: relative;
-}
-
-@keyframes float {
-0% { transform: translateY(0px) rotate(0deg); }
-50% { transform: translateY(-15px) rotate(10deg); }
-100% { transform: translateY(0px) rotate(0deg); }
-}
-
-.bg-shape {
-position: fixed;
-z-index: 0;
-animation: float 6s ease-in-out infinite;
-pointer-events: none;
-}
-.shape-1 { top: 10%; left: 2%; width: 80px; height: 80px; fill: var(--accent-pink); opacity: 0.5; animation-delay: 0s; }
-.shape-2 { top: 50%; right: 2%; width: 60px; height: 60px; fill: var(--accent-yellow); opacity: 0.5; animation-delay: 1.5s; }
-.shape-3 { bottom: 20%; left: 5%; width: 50px; height: 50px; fill: var(--accent-teal); opacity: 0.3; animation-delay: 3s; }
-
-.main-content {
-flex: 1;
-padding: 40px 20px;
-display: flex;
-flex-direction: column;
-width: 100%;
-position: relative;
-z-index: 1;
-}
-
-.banner {
-height: 250px;
-background-color: #F2FAEE;
-border-radius: var(--border-radius-lg);
-position: relative;
-overflow: hidden;
-display: flex;
-justify-content: flex-end;
-align-items: center;
-padding: 40px;
-}
-
-.banner-svg-decor {
-position: absolute;
-animation: float 4s ease-in-out infinite;
-opacity: 0.6;
-}
-.bsd-1 { top: 30px; left: 10%; width: 80px; height: 80px; fill: var(--accent-pink); }
-.bsd-2 { bottom: -20px; left: 30%; width: 120px; height: 120px; fill: var(--accent-yellow); animation-delay: 1.5s; }
-.bsd-3 { top: 50px; right: 65%; width: 50px; height: 50px; fill: var(--bg-sidebar); animation-delay: 2.5s; opacity: 0.4; }
-
-.banner-text {
-position: relative;
-z-index: 1;
-text-align: right;
-color: var(--text-dark);
-}
-.banner-text h1 {
-font-size: 48px;
-color: var(--bg-sidebar);
-text-shadow: 2px 2px 0px #fff;
-letter-spacing: 2px;
-}
-.banner-text p {
-font-size: 18px;
-font-weight: 500;
-background: rgba(255,255,255,0.7);
-padding: 5px 15px;
-border-radius: 20px;
-display: inline-block;
-margin-top: 10px;
-}
-
-.dashboard-grid {
-display: flex;
-gap: 30px;
-margin-top: -80px;
-position: relative;
-z-index: 10;
-}
-
-.left-col {
-width: 320px;
-flex-shrink: 0;
-display: flex;
-flex-direction: column;
-gap: 20px;
-}
-
-.profile-card {
-background-color: var(--bg-card);
-border-radius: var(--border-radius-lg);
-padding: 40px 20px 30px;
-box-shadow: var(--shadow-card);
-text-align: center;
-position: relative;
-}
-
-.badge-premium-new {
-position: absolute;
-top: 15px;
-right: 15px;
-background-color: var(--accent-yellow);
-color: var(--text-dark);
-padding: 6px 12px;
-border-radius: 20px;
-font-size: 11px;
-font-weight: 600;
-display: flex;
-align-items: center;
-gap: 4px;
-box-shadow: 0 4px 10px rgba(255, 213, 79, 0.4);
-animation: float 4s ease-in-out infinite;
-}
-.badge-premium-new svg { width: 12px; height: 12px; fill: currentColor; }
-
-.profile-avatar {
-width: 120px;
-height: 120px;
-border-radius: 50%;
-background-color: var(--text-white);
-border: 6px solid var(--bg-card);
-margin: -90px auto 15px;
-display: flex;
-justify-content: center;
-align-items: center;
-position: relative;
-box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-}
-.profile-avatar:hover { transform: scale(1.05) translateY(-5px); }
-
-.profile-avatar .main-avatar {
-width: 65px;
-height: 65px;
-fill: var(--bg-sidebar);
-position: relative;
-z-index: 5;
-}
-
-.logo-decor {
-position: absolute;
-z-index: 10;
-animation: float 3s ease-in-out infinite;
-filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
-}
-.ld-1 { top: -10px; right: 0px; width: 28px; height: 28px; fill: var(--accent-yellow); animation-delay: 0s; }
-.ld-2 { bottom: 10px; left: -15px; width: 22px; height: 22px; fill: var(--accent-pink); animation-delay: 0.8s; }
-.ld-3 { top: 30px; left: -10px; width: 18px; height: 18px; fill: var(--accent-green); animation-delay: 1.6s; }
-
-.status-dot {
-width: 15px;
-height: 15px;
-background-color: var(--accent-green);
-border: 3px solid var(--bg-card);
-border-radius: 50%;
-position: absolute;
-bottom: 5px;
-right: 15px;
-}
-
-.profile-name { font-size: 28px; color: var(--text-dark); margin-bottom: 5px; }
-.profile-title { font-size: 14px; color: var(--text-light); margin-bottom: 20px; padding: 0 10px; }
-
-.profile-stats {
-display: flex;
-justify-content: center;
-gap: 30px;
-margin-bottom: 10px;
-padding-bottom: 15px;
-}
-.stat-item h4 { font-size: 18px; color: var(--text-dark); }
-.stat-item p { font-size: 12px; color: var(--text-light); }
-
-.quick-nav {
-display: flex;
-flex-wrap: wrap;
-gap: 8px;
-justify-content: center;
-margin-bottom: 25px;
-padding-bottom: 25px;
-border-bottom: 1px dashed #eee;
-}
-.quick-nav-item {
-padding: 8px 14px;
-background-color: var(--bg-main);
-border-radius: 20px;
-font-size: 13px;
-font-weight: 500;
-color: var(--text-dark);
-display: flex;
-align-items: center;
-gap: 6px;
-transition: all 0.3s ease;
-border: 1px solid transparent;
-}
-.quick-nav-item:hover {
-background-color: var(--bg-sidebar);
-color: var(--text-white);
-transform: translateY(-2px);
-box-shadow: 0 5px 10px rgba(56, 194, 179, 0.2);
-}
-.quick-nav-item svg { width: 14px; height: 14px; fill: currentColor; }
-
-.contact-group { display: flex; justify-content: center; gap: 10px; margin-bottom: 20px; }
-.btn-contact {
-padding: 8px 16px;
-border-radius: 20px;
-font-size: 13px;
-font-weight: 500;
-display: flex;
-align-items: center;
-gap: 6px;
-transition: all 0.3s ease;
-}
-.btn-primary { background-color: var(--bg-sidebar); color: var(--text-white); }
-.btn-primary:hover { background-color: #2da396; }
-
-.contact-links {
-display: flex;
-flex-direction: column;
-gap: 10px;
-text-align: left;
-background: #f9fdfc;
-padding: 15px;
-border-radius: var(--border-radius-sm);
-}
-.contact-link-item { display: flex; align-items: center; gap: 10px; font-size: 13px; color: var(--text-dark); }
-.contact-link-item svg { width: 16px; height: 16px; fill: var(--bg-sidebar); }
-
-.right-col {
-flex: 1;
-display: grid;
-grid-template-columns: repeat(2, 1fr);
-grid-auto-rows: min-content;
-gap: 25px;
-}
-
-.content-card {
-background-color: var(--bg-card);
-border-radius: var(--border-radius-lg);
-padding: 30px;
-box-shadow: var(--shadow-card);
-transition: transform 0.3s ease;
-}
-.content-card:hover { transform: translateY(-3px); }
-.card-full { grid-column: span 2; }
-
-.card-header {
-display: flex;
-align-items: center;
-gap: 10px;
-margin-bottom: 20px;
-padding-bottom: 10px;
-border-bottom: 2px solid var(--bg-main);
-}
-.card-header svg { width: 24px; height: 24px; fill: var(--accent-teal); }
-.card-title { font-size: 20px; color: var(--bg-sidebar); }
-
-.btn-fake {
-width: 100%;
-padding: 12px;
-border-radius: var(--border-radius-md);
-background-color: var(--accent-pink);
-color: white;
-font-weight: 600;
-font-size: 15px;
-margin-top: 15px;
-transition: all 0.3s ease;
-display: flex;
-justify-content: center;
-align-items: center;
-gap: 8px;
-position: relative;
-overflow: hidden;
-}
-.btn-fake::after {
-content: ''; position: absolute; top: 0; left: -100%; width: 50%; height: 100%;
-background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.3) 50%, rgba(255,255,255,0) 100%);
-transform: skewX(-25deg); animation: shine 3s infinite;
-}
-@keyframes shine { 0% { left: -100%; } 20% { left: 200%; } 100% { left: 200%; } }
-
-.badge-hot {
-background-color: #ff6b6b; color: white; font-size: 10px; padding: 2px 8px; border-radius: 10px;
-margin-left: 8px; display: inline-block; animation: float 2s infinite;
-}
-
-.list-item { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 10px; font-size: 14px; }
-.list-icon { flex-shrink: 0; width: 20px; height: 20px; fill: var(--accent-pink); margin-top: 2px; }
-
-.highlight-box {
-background-color: #f0fbf9; border-left: 4px solid var(--bg-sidebar);
-padding: 15px; border-radius: 0 var(--border-radius-sm) var(--border-radius-sm) 0;
-font-size: 14px; margin-top: 15px;
-}
-
-.portfolio-group { display: flex; flex-direction: column; gap: 15px; }
-.btn-portfolio {
-display: flex; align-items: center; justify-content: space-between;
-padding: 15px 20px; background-color: var(--bg-main); border-radius: var(--border-radius-md);
-font-size: 16px; font-weight: 500; transition: all 0.3s ease;
-}
-
-.modal-overlay {
-position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-background-color: rgba(42, 76, 72, 0.5); backdrop-filter: blur(5px);
-display: flex; justify-content: center; align-items: center;
-z-index: 1000; opacity: 0; pointer-events: none; transition: all 0.3s ease;
-}
-.modal-overlay.active { opacity: 1; pointer-events: all; }
-.modal-content {
-background-color: var(--bg-card); width: 90%; max-width: 500px;
-border-radius: var(--border-radius-lg); padding: 30px; position: relative;
-max-height: 80vh; overflow-y: auto;
-}
-
-@media (max-width: 768px) {
-.app-container { flex-direction: column; }
-.dashboard-grid { flex-direction: column; margin-top: -60px; }
-.left-col { width: 100%; }
-.right-col { grid-template-columns: 1fr; }
-.banner { height: 200px; justify-content: center; }
-.banner-text { text-align: center; }
-}
+body { display: flex; justify-content: center; color: #884455; margin: 0; min-height: 100vh; background-color: #fce4ec; }
+#app-container { width: 100%; max-width: 430px; min-height: 100vh; background-color: #fff5f8; background-image: radial-gradient(#ffcce0 1.5px, transparent 1.5px); background-size: 20px 20px; position: relative; overflow-x: hidden; box-shadow: 0 0 30px rgba(240, 98, 146, 0.3); }
+@keyframes float { 0%, 100% { transform: translateY(0px) rotate(0deg); } 50% { transform: translateY(-8px) rotate(3deg); } }
+@keyframes spin-slow { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+@keyframes pulse-glow { 0%, 100% { opacity: 0.6; transform: scale(1); } 50% { opacity: 1; transform: scale(1.1); } }
+.animate-float { animation: float 3s ease-in-out infinite; }
+.animate-spin-slow { animation: spin-slow 15s linear infinite; }
+.animate-pulse-glow { animation: pulse-glow 4s ease-in-out infinite; }
+.pop-card { transition: transform 0.2s ease; }
+.pop-card:active { transform: scale(0.97); }
+.speech-bubble { position: relative; }
+.speech-bubble::before { content: ''; position: absolute; left: 50%; transform: translateX(-50%); top: -12px; border-left: 12px solid transparent; border-right: 12px solid transparent; border-bottom: 15px solid #ff99bb; }
+::-webkit-scrollbar { display: none; }
+@keyframes driftRight { 0% { left: -20%; transform: translateY(0) rotate(0deg); opacity: 0; } 15% { opacity: 0.8; } 85% { opacity: 0.8; } 100% { left: 120%; transform: translateY(-40px) rotate(180deg); opacity: 0; } }
+@keyframes driftLeft { 0% { right: -20%; transform: translateY(0) rotate(0deg); opacity: 0; } 15% { opacity: 0.6; } 85% { opacity: 0.6; } 100% { right: 120%; transform: translateY(50px) rotate(-180deg); opacity: 0; } }
+.animate-drift-r { animation: driftRight 16s linear infinite; }
+.animate-drift-l { animation: driftLeft 20s linear infinite; }
+.animate-drift-r-slow { animation: driftRight 25s linear infinite; animation-delay: -7s; }
+.animate-drift-l-slow { animation: driftLeft 28s linear infinite; animation-delay: -12s; }
 </style>
 </head>
-<body>
-<div class="app-container">
-<!-- Floating Shapes -->
-<svg class="bg-shape shape-1" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-<svg class="bg-shape shape-2" viewBox="0 0 24 24"><path d="M12 2.5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 12 2.5Zm0 17a7.5 7.5 0 1 1 7.5-7.5 7.51 7.51 0 0 1-7.5 7.5Z"/></svg>
+<body class="antialiased font-sans">
+<div id="app-container">
+    <!-- Animation Icons (คงไว้ 100%) -->
+    <div class="absolute top-12 animate-drift-r text-white text-3xl pointer-events-none z-0"><i class="fa-solid fa-heart drop-shadow-md"></i></div>
+    <div class="absolute top-32 animate-drift-l text-p_card_light text-4xl pointer-events-none z-0"><i class="fa-solid fa-star"></i></div>
+    <div class="absolute top-80 animate-drift-r-slow text-p_card_light text-2xl pointer-events-none z-0"><i class="fa-solid fa-paw"></i></div>
 
-<main class="main-content">
-<!-- Banner Section -->
-<div class="banner">
-<svg class="banner-svg-decor bsd-1" viewBox="0 0 24 24"><path d="M12 2l2.4 7.6L22 12l-7.6 2.4L12 22l-2.4-7.6L2 12l7.6-2.4L12 2z"/></svg>
-<div class="banner-text">
-<h1 class="english-text">koyangi</h1>
-<p>รับออกแบบป้าย ลายน้ำ Google Sheet เว็บไซต์⭐️</p>
-</div>
-</div>
+    <main class="px-5 py-8 relative z-10">
+        <!-- Header (คงโครงสร้างเดิม) -->
+        <div class="text-center mb-6 relative">
+            <h1 class="font-cute text-[2.75rem] font-bold tracking-wider inline-block relative text-white leading-none mt-2">
+                <span class="text-p_card_dark drop-shadow-[2px_2px_0_#fff]">k</span>
+                <span class="text-white drop-shadow-[2px_2px_0_#ff99bb]">o</span>
+                <span class="text-p_card_main drop-shadow-[2px_2px_0_#fff]">y</span>
+                <span class="text-white drop-shadow-[2px_2px_0_#ffcce0]">a</span>
+                <span class="text-p_card_light drop-shadow-[2px_2px_0_#f06292]">n</span>
+                <span class="text-p_card_dark drop-shadow-[2px_2px_0_#fff]">g</span>
+                <span class="text-white drop-shadow-[2px_2px_0_#ff99bb]">i</span>
+            </h1>
+            <p class="font-cute text-p_card_dark text-sm mt-1 rotate-[-2deg] opacity-80">รับออกแบบป้าย ลายน้ำ Google Sheet เว็บไซต์ ⭐️</p>
+        </div>
 
-<div class="dashboard-grid">
-<!-- Left Column -->
-<div class="left-col">
-<div class="profile-card">
-<div class="badge-premium-new">
-<svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-STATUS: OPEN
-</div>
-<div class="profile-avatar">
-<svg class="logo-decor ld-1" viewBox="0 0 24 24"><path d="M12 2l2.4 7.6L22 12l-7.6 2.4L12 22l-2.4-7.6L2 12l7.6-2.4L12 2z"/></svg>
-<svg class="main-avatar" viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
-<div class="status-dot"></div>
-</div>
-<h2 class="profile-name english-text">koyangi</h2>
-<p class="profile-title">ยินดีต้อนรับสู่ Koyangi - Official Store ค่ะ</p>
+        <!-- Profile / Welcome Section -->
+        <div class="flex flex-col items-center mb-8">
+            <div class="bg-p_card_main rounded-[24px] p-5 shadow-pop w-full text-white mt-2">
+                <div class="flex justify-between items-center mb-3">
+                    <h2 class="font-cute text-xl font-bold drop-shadow-sm">🎨 koyangi shop</h2>
+                    <a href="https://line.me/ti/p/LfBtdhlrVa" target="_blank" class="bg-white text-p_card_dark font-bold font-cute px-3 py-1 rounded-full active:scale-95 transition shadow-sm text-[11px]">
+                        <i class="fa-brands fa-line mr-1 text-p_card_main"></i> ติดต่อสอบถาม
+                    </a>
+                </div>
+                <div class="text-[13px] space-y-2 text-[#fff] leading-snug font-medium">
+                    <p>รับออกแบบงานกราฟิกครบวงจร ไม่ว่าจะเป็น <strong class="underline">ป้าย ลายน้ำ โลโก้ Google Sheet และ Website</strong> งานคุณภาพในราคาน่ารักค่ะ</p>
+                    <div class="bg-white/20 backdrop-blur-sm inline-block px-3 py-1.5 rounded-xl mt-1 text-white text-[11px] border border-white/30">
+                        <i class="fa-solid fa-clock mr-1"></i> ปกติรองาน 4-24 ชม. (งานเร่ง *2 ของราคา)
+                    </div>
+                </div>
+            </div>
+        </div>
 
-<div class="quick-nav">
-<a href="#services" class="quick-nav-item">บริการ</a>
-<a href="#portfolio" class="quick-nav-item">ผลงาน</a>
-<a href="#rules" class="quick-nav-item">เงื่อนไข</a>
-</div>
+        <!-- Order Steps (โครงสร้างเดิม - ข้อมูลใหม่) -->
+        <div class="space-y-3 mb-6">
+            <div class="bg-white rounded-[20px] p-4 shadow-pop text-p_text border border-p_card_light">
+                <h3 class="font-cute text-lg font-bold mb-3 text-p_card_dark"><i class="fa-solid fa-list-check text-p_card_main"></i> ขั้นตอนการสั่ง</h3>
+                <ul class="space-y-2.5 text-[12px] font-medium leading-snug">
+                    <li class="flex gap-2"><span class="bg-p_card_light text-p_card_dark w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 font-cute text-[10px]">1</span><p>กรอกฟอร์ม เขียนรายละเอียดร้านค้า</p></li>
+                    <li class="flex gap-2"><span class="bg-p_card_light text-p_card_dark w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 font-cute text-[10px]">2</span><p>ใส่ลิงก์ตัวอย่างงาน/โลโก้ที่ต้องการใช้มาให้พร้อม</p></li>
+                    <li class="flex gap-2"><span class="bg-p_card_light text-p_card_dark w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 font-cute text-[10px]">3</span><p>รอส่งงานให้เช็ค แจ้งยอด และชำระเงิน</p></li>
+                    <li class="flex gap-2"><span class="bg-p_card_light text-p_card_dark w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 font-cute text-[10px]">4</span><p>ชำระเงินเรียบร้อย รอรับลิงก์งานได้เลยค่า</p></li>
+                </ul>
+            </div>
 
-<div class="contact-links">
-<a href="https://www.facebook.com/profile.php?id=61554192600355" target="_blank" class="contact-link-item">
-<svg viewBox="0 0 24 24"><path d="M12 2.04C6.5 2.04 2 6.53 2 12.06C2 17.06 5.66 21.21 10.44 21.96V14.96H7.9V12.06H10.44V9.85C10.44 7.34 11.93 5.96 14.22 5.96C15.31 5.96 16.45 6.15 16.45 6.15V8.62H15.19C13.95 8.62 13.56 9.39 13.56 10.18V12.06H16.34L15.89 14.96H13.56V21.96A10 10 0 0 0 22 12.06C22 6.53 17.5 2.04 12 2.04Z"/></svg>
-Facebook
-</a>
-<a href="https://line.me/ti/p/LfBtdhlrVa" target="_blank" class="contact-link-item">
-<svg viewBox="0 0 24 24"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1z"/></svg>
-Line Official
-</a>
-<a href="https://www.instagram.com/k0yangi_ii" target="_blank" class="contact-link-item">
-<svg viewBox="0 0 24 24"><path d="M7.8 2h8.4C19.4 2 22 4.6 22 7.8v8.4a5.8 5.8 0 0 1-5.8 5.8H7.8C4.6 22 2 19.4 2 16.2V7.8A5.8 5.8 0 0 1 7.8 2m-.2 2A3.6 3.6 0 0 0 4 7.6v8.8C4 18.39 5.61 20 7.6 20h8.8a3.6 3.6 0 0 0 3.6-3.6V7.6C20 5.61 18.39 4 16.4 4H7.6"/></svg>
-Instagram
-</a>
-</div>
-</div>
-</div>
+            <!-- Badges & Queue Buttons (คงไว้ 100%) -->
+            <a href="https://koyangiiii.github.io/Koyangi-Store/" target="_blank" class="bg-p_card_light text-p_card_dark rounded-[16px] p-3.5 flex items-center justify-between pop-card shadow-pop font-bold font-cute text-sm">
+                <span><i class="fa-solid fa-eye mr-2"></i> ดูตัวอย่างผลงาน 1</span>
+                <i class="fa-solid fa-arrow-right"></i>
+            </a>
 
-<!-- Right Column -->
-<div class="right-col">
-<section class="content-card" id="services">
-<div class="card-header">
-<h3 class="card-title">🎨 งานที่รับทำ</h3>
-</div>
-<ul>
-<li class="list-item"><svg class="list-icon" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>ป้าย ลายน้ำ โลโก้</li>
-<li class="list-item"><svg class="list-icon" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>Google Sheet</li>
-<li class="list-item"><svg class="list-icon" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>Website</li>
-</ul>
-<button class="btn-fake" onclick="window.location.href='https://line.me/ti/p/LfBtdhlrVa'">ทักแชทสั่งงานได้เลยค่ะ</button>
-</section>
+            <a href="https://koyangiiii.github.io/Koyangi-Design/" target="_blank" class="bg-p_card_dark rounded-[16px] p-3.5 flex items-center justify-between pop-card shadow-pop">
+                <div class="flex items-center gap-3">
+                    <div class="bg-white w-8 h-8 rounded-full flex items-center justify-center text-p_card_dark text-sm">
+                        <i class="fa-solid fa-palette"></i>
+                    </div>
+                    <h4 class="font-cute text-white font-bold text-sm">ตัวอย่างผลงาน 2 ✨</h4>
+                </div>
+                <i class="fa-solid fa-chevron-right text-white text-sm"></i>
+            </a>
+        </div>
 
-<section class="content-card" id="portfolio">
-<div class="card-header">
-<h3 class="card-title">⭐️ ตัวอย่างงาน</h3>
-</div>
-<div class="portfolio-group">
-<a href="https://koyangiiii.github.io/Koyangi-Store/" target="_blank" class="btn-portfolio">Koyangi Store <svg width="16" height="16" viewBox="0 0 24 24"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z"/></svg></a>
-<a href="https://koyangiiii.github.io/Koyangi-Design/" target="_blank" class="btn-portfolio">Koyangi Design <svg width="16" height="16" viewBox="0 0 24 24"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z"/></svg></a>
-</div>
-</section>
+        <!-- Rules Card (คงโครงสร้างเดิม - ข้อมูลใหม่) -->
+        <div class="bg-p_card_light rounded-[24px] p-5 shadow-pop relative overflow-hidden mb-4 border border-white/50">
+            <div class="absolute top-3 right-3 text-white text-3xl opacity-40"><i class="fa-solid fa-gavel"></i></div>
+            <div class="inline-block bg-white text-p_card_dark font-cute font-bold px-3 py-0.5 rounded-full mb-3 text-[11px] shadow-sm">
+                📍 กฎของร้าน 📍
+            </div>
+            <div class="space-y-2 text-[12px] text-p_text relative z-10">
+                <p class="bg-white/60 p-2 rounded-lg backdrop-blur-sm">โอนเงินแล้วทางร้านไม่คืนเงินทุกกรณีนะคะ</p>
+                <p class="bg-white/60 p-2 rounded-lg backdrop-blur-sm">ยกเลิกหลังส่งบรีฟ (งานเริ่มแล้ว) คืนเงิน 50%</p>
+                <p class="bg-white/60 p-2 rounded-lg backdrop-blur-sm">ยกเลิกหลังจากเช็คงาน = <strong class="text-p_card_dark">ไม่คืนเงิน</strong> และส่งงานตามปกติ</p>
+                <p class="bg-p_card_dark text-white p-1.5 rounded-lg font-bold text-center mt-2 shadow-pop text-[11px]">
+                    🌸 โอนเงิน = ยอมรับกฎของร้าน 🌸
+                </p>
+            </div>
+        </div>
 
-<section class="content-card card-full" id="rules">
-<div class="card-header">
-<h3 class="card-title">📋 เงื่อนไข & ขั้นตอน</h3>
-</div>
-<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
-<div>
-<h4 style="color: var(--bg-sidebar); margin-bottom: 10px;">📋 ขั้นตอนการสั่ง</h4>
-<ul style="font-size: 13px;">
-<li>- กรอกฟอร์ม เขียนรายละเอียดร้านค้า</li>
-<li>- ใส่ลิงก์ ตัวอย่างงานมาให้พร้อม หากมีโลโก้ให้แนบมา</li>
-<li>- ส่งงานให้เช็ค แจ้งยอด ชำระเงิน</li>
-<li>- รอรับลิงก์ได้เลยค่า</li>
-</ul>
-</div>
-<div>
-<h4 style="color: var(--bg-sidebar); margin-bottom: 10px;">📋 เงื่อนไข</h4>
-<p style="font-size: 13px;">
-• รองาน 4-24 ชั่วโมง แล้วแต่คิว<br>
-• งานเร่ง *2 ของราคา
-</p>
-</div>
-</div>
-<div class="highlight-box" style="background-color: #fff5f5; border-left-color: #ff9999;">
-<h4 style="color: #d9534f;">📍 กฎของร้าน 📍</h4>
-<p style="font-size: 13px; color: #d9534f;">
-- โอนเงินแล้วไม่คืนเงินทุกกรณี<br>
-- ยกเลิกงานหลังส่งบรีฟ (เริ่มงานแล้ว) คืนเงิน 50%<br>
-- ยกเลิกหลังเช็คงาน ไม่คืนเงินและส่งงานตามปกติ
-</p>
-</div>
-</section>
-</div>
-</div>
-</main>
-</div>
+        <!-- Gallery / Social (คงโครงสร้างปุ่มกลมด้านบนและไอเทม 6 ช่อง) -->
+        <div class="mb-4">
+            <div class="inline-block bg-white text-p_card_dark font-cute font-bold px-4 py-1.5 rounded-full mb-4 text-sm shadow-pop transform -rotate-1 border border-p_card_light">
+                Contact Me (ช่องทางติดต่อ)
+            </div>
+            <div class="grid grid-cols-3 gap-2.5">
+                <!-- Facebook -->
+                <a href="https://www.facebook.com/profile.php?id=61554192600355" target="_blank" class="bg-white rounded-[16px] p-2 text-center pop-card shadow-pop border-2 border-dashed border-p_card_light">
+                    <div class="bg-p_card_light rounded-lg aspect-square mb-1.5 flex items-center justify-center text-2xl text-white">
+                        <i class="fa-brands fa-facebook"></i>
+                    </div>
+                    <h4 class="font-cute font-bold text-p_card_dark text-[10px]">Facebook</h4>
+                </a>
+                <!-- Line -->
+                <a href="https://line.me/ti/p/LfBtdhlrVa" target="_blank" class="bg-p_card_light rounded-[16px] p-2 text-center pop-card shadow-pop border-2 border-dashed border-white">
+                    <div class="bg-white/50 rounded-lg aspect-square mb-1.5 flex items-center justify-center text-2xl text-p_card_dark">
+                        <i class="fa-brands fa-line"></i>
+                    </div>
+                    <h4 class="font-cute font-bold text-p_card_dark text-[10px]">Line</h4>
+                </a>
+                <!-- Instagram -->
+                <a href="https://www.instagram.com/k0yangi_ii" target="_blank" class="bg-p_card_main rounded-[16px] p-2 text-center pop-card shadow-pop border-2 border-dashed border-white/50">
+                    <div class="bg-white/30 rounded-lg aspect-square mb-1.5 flex items-center justify-center text-2xl text-white">
+                        <i class="fa-brands fa-instagram"></i>
+                    </div>
+                    <h4 class="font-cute font-bold text-white text-[10px]">Instagram</h4>
+                </a>
+            </div>
+        </div>
 
-<script>
-function openModal(id) { document.getElementById(id).classList.add('active'); document.body.style.overflow = 'hidden'; }
-function closeModal(id) { document.getElementById(id).classList.remove('active'); document.body.style.overflow = 'auto'; }
-window.onclick = function(event) { if (event.target.classList.contains('modal-overlay')) { event.target.classList.remove('active'); document.body.style.overflow = 'auto'; } }
-</script>
+        <!-- Footer -->
+        <footer class="text-center py-4 border-t border-p_card_light mt-4 text-xs text-p_text font-cute">
+            <p>สอบถามได้ตลอด 24 ชม. เลยนะคะ ยินดีให้บริการค่ะ 💖</p>
+            <p class="text-[9px] mt-1 opacity-60">koyangi &copy; 2026</p>
+        </footer>
+    </main>
+</div>
 </body>
 </html>
