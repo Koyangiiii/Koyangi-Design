@@ -18,13 +18,12 @@ sans: ['Mitr', 'sans-serif'],
 mono: ['Space Mono', 'monospace'],
 },
 colors: {
-// --- ปรับเปลี่ยนโทนสีเป็นชมพูพาสเทล ---
-'pink-main': '#ffb7c5',    // สีชมพูหลัก (Cherry Blossom)
-'pink-soft': '#fff0f3',    // สีชมพูอ่อนมาก (พื้นหลังการ์ด)
-'pink-deep': '#8b4b62',    // สีน้ำตาลแดง/ชมพูเข้ม (ตัวหนังสือหลัก)
-'yellow-main': '#fcf096',   // สีเหลืองพาสเทลหลัก (คงเดิมเพื่อตัดกัน)
-'yellow-soft': '#fffce8',   // สีเหลืองอ่อน (คงเดิม)
-'yellow-deep': '#eab308',   // สีเหลืองเข้ม (คงเดิม)
+'pink-main': '#ffc0cb', // Pink Pastel Main
+'pink-soft': '#fff0f5', // Lavender Blush (Very Soft Pink)
+'pink-deep': '#db7093', // Pale Violet Red (Deep Pink Pastel)
+'yellow-main': '#fcf096', 
+'yellow-soft': '#fffce8', 
+'yellow-deep': '#eab308', 
 'ticket-bg': '#ffffff',
 }
 }
@@ -33,11 +32,11 @@ colors: {
 </script>
 <style>
 body {
-/* --- ปรับพื้นหลังหลัก --- */
-background-color: #fffafb; /* พื้นหลังขาวอมชมพู */
-background-image: radial-gradient(#ffb7c5 1.2px, transparent 1.2px); /* จุดสีชมพู */
+background-color: #fff0f5; /* pink-soft */
+background-image: radial-gradient(#ffc0cb 1.2px, transparent 1.2px); /* pink-main */
 background-size: 24px 24px;
 overflow-x: hidden;
+color: #db7093; /* pink-deep */
 }
 .floating-container {
 position: fixed;
@@ -58,8 +57,7 @@ animation-fill-mode: both;
 .svg-float svg {
 width: 100%;
 height: 100%;
-/* --- ปรับเงาสีชมพู --- */
-filter: drop-shadow(0px 2px 4px rgba(255, 183, 197, 0.4));
+filter: drop-shadow(0px 2px 4px rgba(255, 192, 203, 0.4)); /* pink-main shadow */
 }
 @keyframes float-around {
 0% { transform: translateY(110vh) rotate(0deg); opacity: 0; }
@@ -68,8 +66,7 @@ filter: drop-shadow(0px 2px 4px rgba(255, 183, 197, 0.4));
 100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
 }
 #splash-screen {
-/* --- ปรับ Gradient ของ Splash Screen --- */
-background: linear-gradient(180deg, #fff0f3 0%, #ffb7c5 100%);
+background: linear-gradient(180deg, #fff0f5 0%, #ffc0cb 100%); /* pink-soft to pink-main */
 transition: opacity 0.8s ease-out, visibility 0.8s ease-out;
 z-index: 60;
 }
@@ -95,13 +92,12 @@ border-radius: 50%;
 50% { transform: translateY(-10px); }
 }
 .pulse-btn {
-/* --- ปรับเงาของปุ่มกด --- */
 animation: pulse-ring 2.5s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
 }
 @keyframes pulse-ring {
-0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(255, 183, 197, 0.6); }
-70% { transform: scale(1); box-shadow: 0 0 0 15px rgba(255, 183, 197, 0); }
-100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(255, 183, 197, 0); }
+0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(255, 192, 203, 0.6); } /* pink-main pulse */
+70% { transform: scale(1); box-shadow: 0 0 0 15px rgba(255, 192, 203, 0); }
+100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(255, 192, 203, 0); }
 }
 #main-content {
 display: none;
@@ -116,9 +112,8 @@ top: 50%;
 transform: translateY(-50%);
 width: 30px;
 height: 30px;
-/* --- ปรับสีรอยตัดตั๋วให้กลืนกับพื้นหลังใหม่ --- */
-background-color: #fffafb;
-background-image: radial-gradient(#ffb7c5 1.2px, transparent 1.2px);
+background-color: #fff0f5; /* pink-soft */
+background-image: radial-gradient(#ffc0cb 1.2px, transparent 1.2px); /* pink-main */
 background-size: 24px 24px;
 border-radius: 50%;
 z-index: 10;
@@ -126,8 +121,7 @@ z-index: 10;
 .ticket-cutout-left { left: -15px; }
 .ticket-cutout-right { right: -15px; }
 .dashed-divider {
-/* --- ปรับเส้นประสีชมพู --- */
-border-top: 3px dashed #ffb7c5;
+border-top: 3px dashed #ffc0cb; /* pink-main */
 position: relative;
 }
 .stamp {
@@ -144,9 +138,8 @@ opacity: 0.6;
 pointer-events: none;
 }
 .stamp-p1 {
-/* --- ปรับแสตมป์ 1 เป็นชมพู --- */
-border: 4px solid #ffb7c5;
-color: #ffb7c5;
+border: 4px solid #ffc0cb; /* pink-main */
+color: #ffc0cb; /* pink-main */
 width: 100px;
 height: 100px;
 transform: rotate(-15deg);
@@ -170,9 +163,8 @@ flex-direction: column;
 line-height: 1.2;
 }
 .stamp-p3 {
-/* --- ปรับแสตมป์ 3 เป็นชมพูเข้ม --- */
-border: 3px solid #8b4b62;
-color: #8b4b62;
+border: 3px solid #db7093; /* pink-deep */
+color: #db7093; /* pink-deep */
 width: 140px;
 height: 60px;
 border-radius: 5px;
@@ -183,17 +175,16 @@ text-align: center;
 .barcode {
 height: 40px;
 width: 100%;
-/* --- ปรับบาร์โค้ดเป็นโทนชมพู-น้ำตาล --- */
 background: repeating-linear-gradient(
 90deg,
-#ffb7c5, #ffb7c5 2px, transparent 2px, transparent 5px,
+#ffc0cb, #ffc0cb 2px, transparent 2px, transparent 5px, /* pink-main */
 #fcf096 5px, #fcf096 8px, transparent 8px, transparent 11px,
-#8b4b62 11px, #8b4b62 13px, transparent 13px, transparent 16px
+#db7093 11px, #db7093 13px, transparent 13px, transparent 16px /* pink-deep */
 );
 }
 .data-label {
 font-size: 0.7rem;
-color: #ffb7c5; /* Label ชมพูอ่อน */
+color: #ffc0cb; /* pink-main */
 text-transform: uppercase;
 font-weight: 700;
 letter-spacing: 1px;
@@ -201,25 +192,25 @@ letter-spacing: 1px;
 .data-value {
 font-family: 'Space Mono', monospace;
 font-size: 1.1rem;
-color: #8b4b62; /* Value ชมพูเข้ม */
+color: #db7093; /* pink-deep */
 font-weight: 700;
 }
 ::-webkit-scrollbar { width: 8px; }
-::-webkit-scrollbar-track { background: #fffafb; }
-::-webkit-scrollbar-thumb { background: #ffb7c5; border-radius: 4px; }
+::-webkit-scrollbar-track { background: #fff0f5; } /* pink-soft */
+::-webkit-scrollbar-thumb { background: #ffc0cb; border-radius: 4px; } /* pink-main */
 </style>
 </head>
-<body class="font-sans antialiased min-h-screen relative text-pink-deep">
+<body class="font-sans antialiased min-h-screen relative">
 <div id="floating-emojis" class="floating-container"></div>
 
 <div id="splash-screen" class="fixed inset-0 flex flex-col items-center justify-center">
 <div class="cloud cloud-1"></div>
 <div class="cloud cloud-2"></div>
 <div class="relative z-10 flex flex-col items-center">
-<div class="w-32 h-32 bg-white rounded-3xl shadow-xl flex items-center justify-center mb-6 border-4 border-[#fff0f3] overflow-hidden">
+<div class="w-32 h-32 bg-white rounded-3xl shadow-xl flex items-center justify-center mb-6 border-4 border-[#fff0f5] overflow-hidden">
 <img src="logo1.png" alt="Shop Logo" class="w-full h-full object-cover hover:scale-110 transition duration-500">
 </div>
-<h1 class="text-white text-4xl md:text-5xl font-bold tracking-wider mb-2 drop-shadow-md">Koyangi</h1>
+<h1 class="text-white text-4xl md:text-5xl font-bold tracking-wider mb-2 drop-shadow-md uppercase">Koyangi</h1>
 <p class="text-white text-sm md:text-base tracking-widest uppercase italic font-medium mb-4 drop-shadow-sm">Design & Web Service</p>
 <div class="flex text-yellow-main space-x-1 mb-12 text-xl drop-shadow-sm">
 <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
@@ -242,11 +233,11 @@ font-weight: 700;
 <div>
 <h2 class="text-2xl font-bold tracking-widest drop-shadow-sm uppercase">Boarding Pass</h2>
 <p class="text-sm uppercase tracking-wider opacity-90">Passenger Name</p>
-<p class="font-mono text-xl drop-shadow-sm text-yellow-main">KOYANGI STORE</p>
+<p class="font-mono text-xl drop-shadow-sm text-yellow-main uppercase">KOYANGI STORE</p>
 </div>
 </div>
 <div class="text-right hidden sm:block relative z-10">
-<h1 class="text-3xl font-extrabold italic drop-shadow-sm text-yellow-main">Koyangi</h1>
+<h1 class="text-3xl font-extrabold italic drop-shadow-sm text-yellow-main uppercase">Koyangi</h1>
 <p class="text-xs uppercase opacity-90">Design Studio</p>
 </div>
 </div>
@@ -260,10 +251,10 @@ font-weight: 700;
 <p class="text-pink-main text-sm font-medium italic">งานคุณภาพ ใส่ใจทุกรายละเอียด</p>
 </div>
 <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
-<div><p class="data-label">From</p><p class="data-value">IDEA</p></div>
-<div><p class="data-label">To</p><p class="data-value">DESIGN</p></div>
-<div><p class="data-label">Gate</p><p class="data-value text-yellow-deep">KOYANGI</p></div>
-<div><p class="data-label">Status</p><p class="data-value text-pink-deep">OPEN</p></div>
+<div><p class="data-label">From</p><p class="data-value uppercase">Idea</p></div>
+<div><p class="data-label">To</p><p class="data-value uppercase">Design</p></div>
+<div><p class="data-label">Gate</p><p class="data-value text-yellow-deep uppercase">Koyangi</p></div>
+<div><p class="data-label">Status</p><p class="data-value text-pink-deep uppercase">Open</p></div>
 </div>
 <div class="bg-yellow-soft p-5 rounded-2xl border-2 border-yellow-main shadow-sm relative z-10">
 <h4 class="font-bold text-pink-deep mb-3"><i class="fa-solid fa-palette mr-2 text-pink-main"></i> งานที่รับทำ</h4>
@@ -303,13 +294,13 @@ font-weight: 700;
 </div>
 
 <div class="p-8 bg-pink-soft relative">
-<div class="absolute inset-0 opacity-20" style="background-image: repeating-linear-gradient(45deg, #ffb7c5 0, #ffb7c5 2px, transparent 2px, transparent 10px);"></div>
+<div class="absolute inset-0 opacity-20" style="background-image: repeating-linear-gradient(45deg, #fcf096 0, #fcf096 2px, transparent 2px, transparent 10px);"></div>
 <div class="relative z-10">
 <div class="grid md:grid-cols-2 gap-6">
 <div class="bg-white p-5 rounded-2xl border-2 border-pink-main shadow-sm">
 <h4 class="font-bold text-pink-deep mb-3"><i class="fa-solid fa-clipboard mr-2 text-pink-main"></i> เงื่อนไข</h4>
 <ul class="text-sm text-pink-deep space-y-2 font-medium">
-<li class="flex items-start"><i class="fa-solid fa-clock text-yellow-deep w-5 mt-1"></i> <span>ตามปกติรองาน 4-8 ชั่วโมง แล้วแต่คิวของวันนั้นๆ</span></li>
+<li class="flex items-start"><i class="fa-solid fa-clock text-yellow-deep w-5 mt-1"></i> <span>ตามปกติรองาน 4-24 ชั่วโมง แล้วแต่คิวของวันนั้นๆ</span></li>
 <li class="flex items-start"><i class="fa-solid fa-bolt text-yellow-deep w-5 mt-1"></i> <span>งานเร่ง *2 ของราคา</span></li>
 </ul>
 </div>
@@ -364,7 +355,7 @@ font-weight: 700;
 <div class="mt-10 text-center">
 <p class="text-xs font-bold text-pink-main uppercase tracking-widest mb-2">Ticket Confirmation</p>
 <div class="barcode mb-3 mx-auto max-w-sm opacity-80 rounded-sm"></div>
-<p class="font-mono text-sm tracking-[0.3em] text-pink-deep">KOYA-<span class="text-yellow-deep">2026</span>-DESIGN-<span class="text-pink-main">SOFT</span></p>
+<p class="font-mono text-sm tracking-[0.3em] text-pink-deep uppercase">Koya-2026-Design-Soft</p>
 <p class="text-pink-deep mt-6 text-sm font-bold tracking-wide"><i class="fa-solid fa-heart text-pink-main mr-1"></i> ขอบคุณที่ไว้วางใจ Koyangi นะคะ <i class="fa-solid fa-heart text-yellow-deep ml-1"></i></p>
 </div>
 </div>
@@ -380,8 +371,7 @@ const svgs = [
 '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96z"/></svg>',
 '<svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="8"/></svg>'
 ];
-/* --- ปรับสีองค์ประกอบลอยตัวเป็นโทนชมพู-ขาว-เหลือง --- */
-const pastelColors = ['#ffb7c5', '#8b4b62', '#ffffff', '#fcf096', '#fff0f3'];
+const pastelColors = ['#ffc0cb', '#db7093', '#ffffff', '#fcf096', '#fff0f5']; /* pink based pastel colors */
 const svgCount = 18;
 for (let i = 0; i < svgCount; i++) {
 const span = document.createElement('span');
